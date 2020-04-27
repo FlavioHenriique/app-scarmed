@@ -2,6 +2,7 @@
 <head>
     <title>Cadastro de usuário</title>
     <meta charset="utf-8" />
+    <link rel="icon" href="img/logo.jpeg">
     <link rel="stylesheet" href="css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="js/sweetalert.min.js"></script>
@@ -27,7 +28,8 @@
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha" class="form-control" required/>
                 <br>
-                <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-secondary" />
+                <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-secondary" href="index.php">Voltar ao login</a>
             </form>
         </div>
     </div>
