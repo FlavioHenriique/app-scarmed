@@ -14,12 +14,14 @@ class UsuarioDAO{
         try{
             $sql = "";
             $sql = "INSERT into USUARIO";
-            $sql .= " (nome, email, senha, cpf)";
+            $sql .= " (nome, email, senha, cpf, cep, data_nascimento)";
             $sql .= " values (";
             $sql .= "'" . $usuario->getNome() . "',";
             $sql .= "'" . $usuario->getEmail() . "',";
             $sql .= "'" . $usuario->getSenha() . "',";
-            $sql .= "'" . $usuario->getCpf() . "'";
+            $sql .= "'" . $usuario->getCpf() . "',";
+            $sql .= "'" . $usuario->getCep() . "',";
+            $sql .= "'" . $usuario->getDataNascimento() . "'";
             $sql .= ")";
 
             mysqli_query($conn, $sql);

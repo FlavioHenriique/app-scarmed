@@ -1,0 +1,23 @@
+ScarMed - Evolução em Saúde
+1° etapa
+	⁃	cadastro do profissional / usuário comum
+	⁃	Usuário cadastrado:
+	⁃	Libera lista de intercambialidade
+	⁃	Pesquisa por palavras chaves ex: dor de cabeça
+	⁃	         - Aparecerá todos os remédios que contém como indicação tratar dor de cabeça
+	⁃	Calculadora de dose
+	⁃	Tipos de receita para cada medicamento de controle especial “ definido por produto pesquisado- já aparecendo “ tipo o consultaremedios”
+Cadastro
+	⁃	profissional
+	⁃	Numero de inscrição do conselho e o tipo de conselho “ tentar ver se busca da fonte os dedos dele “
+	⁃	Data de nascimento
+	⁃	Nome completo
+	⁃	Cep?
+	⁃	CPF.
+Usuário comum
+	⁃	nome completo
+	⁃	Data de nasc
+	⁃	Cep
+Usuário não cadastrado
+	⁃	consulta comum a bulas por nome de substâncias ou medicação...
+	⁃	calculadora de dose

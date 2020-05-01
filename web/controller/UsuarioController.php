@@ -10,6 +10,9 @@ if (isset($_POST['bt-cadastro-usuario'])){
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
     $cep = $_POST['cep'];
+    $data = $_POST['data'];
+    $data = date_create($data);
+    $data = date_format($data, "Y-m-d");
 
     try{
         $senha = md5($senha);
@@ -19,6 +22,7 @@ if (isset($_POST['bt-cadastro-usuario'])){
         $usuario->setEmail($email);
         $usuario->setSenha($senha);
         $usuario->setCep($cep);
+        $usuario->setDataNascimento($data);
         insereUsuario($usuario);
         header('Location: ../../cadastroUsuario.php?message=sucess');
     }catch(exception $e){
