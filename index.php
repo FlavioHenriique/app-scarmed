@@ -12,7 +12,7 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
-    <h3 class="light">Integração </h3>
+    <h3 class="light">Integração git Phpstorm</h3>
     <a href="teste.php">teste</a>
     <div class="container-fluid">
         <div class="row">
