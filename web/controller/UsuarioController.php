@@ -9,17 +9,16 @@ if (isset($_POST['bt-cadastro-usuario'])){
     $senha = $_POST['senha'];
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
+    $cep = $_POST['cep'];
+
     try{
-        if (validaCPF($cpf) == false) {
-            throw new Exception("O CPF " . $cpf . " é inválido!");
-        }
         $senha = md5($senha);
-        echo $senha;
         $usuario = new Usuario();
         $usuario->setNome($nome);
         $usuario->setCpf($cpf);
         $usuario->setEmail($email);
         $usuario->setSenha($senha);
+        $usuario->setCep($cep);
         insereUsuario($usuario);
         header('Location: ../../cadastroUsuario.php?message=sucess');
     }catch(exception $e){
@@ -43,6 +42,12 @@ if (isset($_POST['btn-login'])){
 }
 
 function insereUsuario(Usuario $usuario){
+    if (!isCPFValido($usuario->getCpf())) {
+        throw new Exception("O CPF " . $usuario->getCpf() . " é inválido!");
+    }
+    if (!isCepValido($usuario->getCep())) {
+        throw  new Exception("O cep " . $usuario->getCep() . " é inválido");
+    }
     $dao = new UsuarioDAO();
     $dao->salvar($usuario);
 }
@@ -52,7 +57,7 @@ function login($email, $senha){
     return ($dao->login($email, $senha));
 }
 
-function validaCPF($cpf) {
+function isCPFValido($cpf) {
     // Extrai somente os números
     $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
     // Verifica se foi informado todos os digitos corretamente
@@ -74,4 +79,18 @@ function validaCPF($cpf) {
         }
     }
     return true;
+}
+
+function isCepValido($cep){
+    if (($cep == "") or (strlen($cep) <> 8)) {
+        return false;
+    }
+    $cep = $_POST['cep'];
+    $url = "https://viacep.com.br/ws/$cep/json/";
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    $result = strtoupper($result);
+    return (strpos($result, "ERRO") === false);
 }

@@ -7,7 +7,7 @@ function getConnection(){
         $dbhost = 'localhost';
         $dbusername = "root";
         $dbpassword = "flavio22";
-        $db = "teste";
+        $db = "scarmed";
     }else{
         $dbhost = 'scarmed.mysql.uhserver.com';
         $dbusername = "scarmed";

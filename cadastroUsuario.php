@@ -2,6 +2,7 @@
 <head>
     <title>Cadastro de usuário</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="img/logo.jpeg">
     <link rel="stylesheet" href="css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,26 +12,32 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<br>
     <div class="container">
         <h3 class="light">Cadastro de usuário</h3>
-        <div class="form-group">
-            <form method="POST" action="web/controller/UsuarioController.php">
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome" class="form-control" required />
-                <br>
-                <label for="cpf">CPF</label>
-                <input type="number" name="cpf" id="cpf" class="form-control"
-                       required  maxlength="15"/>
-                <br>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required/>
-                <br>
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" class="form-control" required/>
-                <br>
-                <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
-                <a class="btn btn-secondary" href="index.php">Voltar ao login</a>
-            </form>
+        <div class="row">
+            <div class="form-group col-md-8 col-sm-12">
+                <form method="POST" action="web/controller/UsuarioController.php">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" class="form-control" required />
+                    <br>
+                    <label for="cpf">CPF</label>
+                    <input type="number" name="cpf" id="cpf" class="form-control"
+                           required  maxlength="15"/>
+                    <br>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required/>
+                    <br>
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" class="form-control" required/>
+                    <br>
+                    <label for="cep">Cep</label>
+                    <input type="text" name="cep" id="cep" class="form-control" required/>
+                    <br>
+                    <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
+                    <a class="btn btn-secondary" href="index.php">Voltar ao login</a>
+                </form>
+            </div>
         </div>
     </div>
 </body>
