@@ -13,6 +13,9 @@ if (isset($_POST['bt-cadastro-usuario'])){
     $data = $_POST['data'];
     $data = date_create($data);
     $data = date_format($data, "Y-m-d");
+    $numeroInscricao = ($_POST['numInscricao'] == null) ? 0 : $_POST['numInscricao'];
+    $tipoInscricao = ($_POST['tipoInscricao'] == null) ? 0 : $_POST['tipoInscricao'];
+    $telefone = $_POST['telefone'];
 
     try{
         $senha = md5($senha);
@@ -23,6 +26,9 @@ if (isset($_POST['bt-cadastro-usuario'])){
         $usuario->setSenha($senha);
         $usuario->setCep($cep);
         $usuario->setDataNascimento($data);
+        $usuario->setInscricaoConselho($numeroInscricao);
+        $usuario->setTipoInscricao($tipoInscricao);
+        $usuario->setTelefone($telefone);
         insereUsuario($usuario);
         header('Location: ../../cadastroUsuario.php?message=sucess');
     }catch(exception $e){
@@ -32,10 +38,10 @@ if (isset($_POST['bt-cadastro-usuario'])){
 
 if (isset($_POST['btn-login'])){
     try{
-        $email = $_POST['email'];
+        $identificador = $_POST['identificador'];
         $senha = $_POST['senha'];
         $senha = md5($senha);
-        if (login($email, $senha)) {
+        if (login($identificador, $senha)) {
             header('Location: ../../index.php?message=sucess');
         }else{
             header('Location: ../../index.php?message=error');
@@ -56,9 +62,9 @@ function insereUsuario(Usuario $usuario){
     $dao->salvar($usuario);
 }
 
-function login($email, $senha){
+function login($identificador, $senha){
     $dao = new UsuarioDAO();
-    return ($dao->login($email, $senha));
+    return ($dao->login($identificador, $senha));
 }
 
 function isCPFValido($cpf) {

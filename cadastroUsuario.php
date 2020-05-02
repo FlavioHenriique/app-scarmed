@@ -1,4 +1,7 @@
 <html>
+<?php
+    include("header.html");
+?>
 <head>
     <title>Cadastro de usuário</title>
     <meta charset="utf-8"/>
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/datepicker.min.css"/>
+    <link rel="stylesheet" href="css/view/scarmed.css"/>
 
     <!-- JAVASCRIPT -->
     <script src="js/sweetalert.min.js"></script>
@@ -24,15 +28,14 @@
     <div class="container">
         <h3 class="light">Cadastro de usuário</h3>
         <div class="row">
-            <div class="form-group col-md-8 col-sm-12">
-
+            <div class="form-group col-md-8 col-sm-12 border rounded form-custom">
                 <!-- Form de cadastro de Usuário -->
                 <form method="POST" action="web/controller/UsuarioController.php">
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" id="nome" class="form-control" required/>
                     <br>
                     <label class="control-label" for="data">Data de nascimento</label>
-                    <input class="form-control" id="data" name="data" placeholder="MM/DD/YYYY"
+                    <input class="form-control" id="data" name="data" placeholder="DD/MM/YYYY"
                            required type="text" autocomplete="off"/>
                     <br>
                     <label for="cpf">CPF</label>
@@ -45,13 +48,17 @@
                     <label for="senha">Senha</label>
                     <input type="password" name="senha" id="senha" class="form-control" required/>
                     <br>
+                    <label for="telefone">Telefone</label>
+                    <input type="text" required maxlength="15" name="telefone" id="telefone"
+                           class="form-control" />
+                    <br>
                     <label for="cep">Cep</label>
                     <input type="text" name="cep" id="cep" class="form-control" required/>
                     <br>
                     <div class="form-check">
-                        <label class="form-check-label" for="ehProfissional">Sou um profissional</label>
                         <input class="form-check-input" type="checkbox" id="ehProfissional"
                                onclick="marcaEhProfissional()">
+                        <label class="form-check-label" for="ehProfissional">Sou um profissional</label>
                     </div>
                     <br>
                     <label for="numInscricao">Número de inscrição do Conselho</label>
@@ -59,10 +66,11 @@
                     <br>
                     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Tipo de inscrição</label>
                     <select class="custom-select my-1 mr-sm-2" id="tipoInscricao" name="tipoInscricao">
-                        <option selected>Selecione...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="0" selected>Selecione...</option>
+                        <option value="1">CRF - Conselho Regional de Farmácia</option>
+                        <option value="2">CFF - Conselho Federal de Farmácia</option>
+                        <option value="3">CRM - Conselho Regional de Medicina</option>
+                        <option value="4">CFM - Conselho Federal de Medicina</option>
                     </select>
                     <br><br>
                     <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
@@ -71,5 +79,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

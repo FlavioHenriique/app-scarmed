@@ -11,6 +11,23 @@ class Usuario {
     private $telefone;
     private $tipo;
     private $inscricaoConselho;
+    private $tipoInscricao;
+
+    /**
+     * @return mixed
+     */
+    public function getTipoInscricao()
+    {
+        return $this->tipoInscricao;
+    }
+
+    /**
+     * @param mixed $tipoInscricao
+     */
+    public function setTipoInscricao($tipoInscricao)
+    {
+        $this->tipoInscricao = $tipoInscricao;
+    }
 
     /**
      * @return mixed
