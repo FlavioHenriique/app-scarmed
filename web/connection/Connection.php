@@ -2,7 +2,8 @@
 
 function getConnection(){
     // 1 = PRODUCAO , 2 = TESTES
-    $versao = 2;
+    $versao = ($_SERVER['HTTP_HOST'] == 'localhost') ? 2 : 1;
+
     if ($versao == 2) {
         $dbhost = 'localhost';
         $dbusername = "root";
