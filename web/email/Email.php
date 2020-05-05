@@ -16,8 +16,7 @@ function enviaEmail($destinatario, $nome){
         echo "enviando email";
         $mail->SMTPDebug = 2;
         $mail->isSMTP();                                            // Send using SMTP
-        $mail->Host       = 'scarmed.com.br';                    // Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Host       = 'smtp.scarmed.com.br';                    // Set the SMTP server to send through
         $mail->Username   = 'apnno@icloud.com';                     // SMTP username
         $mail->Password   = 'Scar2k19';                               // SMTP password
 
