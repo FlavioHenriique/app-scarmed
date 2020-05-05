@@ -6,13 +6,13 @@ include("header.html");
     <title>Scarmed - Evolução em Saúde</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="img/icon.png">
 
     <!-- CSS -->
-    <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/view/scarmed.css" />
-
+    
     <!-- JAVASCRIPT -->
     <script src="js/sweetalert.min.js"></script>
     <script src="js/bootstrap.min.js"
@@ -20,6 +20,7 @@ include("header.html");
         crossorigin="anonymous"></script>
 </head>
 <body>
+<a href="web/email/Email.php" >teste</a>
     <div class="container-fluid">
         <div class="form-group">
             <br>
