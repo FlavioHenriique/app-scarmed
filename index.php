@@ -1,5 +1,7 @@
 <html>
 <?php
+   require_once 'web/email/Email.php';
+    enviaEmail("jaquelira4@gmail.com", "Jaqueline teste");
 include("header.html");
 ?>
 <head>

@@ -6,14 +6,15 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
-require '../vendor/autoload.php';
 
+require_once 'web/vendor/autoload.php';
 function enviaEmail($destinatario, $nome){
     $mail = new PHPMailer(true);
 
     try {
         //Server settings
-         $mail->SMTPDebug = 2;
+        echo "enviando email";
+        $mail->SMTPDebug = 2;
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
