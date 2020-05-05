@@ -2,6 +2,7 @@
 
 require_once '../model/Usuario.php';
 require_once  '../connection/Connection.php';
+require_once '../email/Email.php';
 
 class UsuarioDAO{
 
@@ -32,6 +33,7 @@ class UsuarioDAO{
             if (mysqli_error($conn) != "") {
                 throw  new Exception(mysqli_error($conn));
             }
+            enviaEmail($usuario->getEmail(), $usuario->getNome());
         } finally {
             $conn->close();
         }
