@@ -13,7 +13,7 @@ $email->Port = 587;
 $email->Host = "smtp.gmail.com";
 $email->Username = "flaviohenrique638@gmail.com";
 $email->SMTPSecure = PhpMailer::ENCRYPTION_STARTTLS;
-$email->Password = "rasenshuriken";
+$email->Password = "vowepcqqegxqihlp";
 $email->SetFrom("flaviohenrique638@gmail.com" , "teste");
 
 $email->AddAddress("jaquelira4@gmail.com" , "teste"); //Já troquei aqui pra outra pessoa e também nada !
