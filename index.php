@@ -20,7 +20,6 @@ include("header.html");
         crossorigin="anonymous"></script>
 </head>
 <body>
-<a href="teste.php" >teste</a>
     <div class="container-fluid">
         <div class="form-group">
             <br>
@@ -50,6 +49,7 @@ include("header.html");
     let msg = url.searchParams.get('message');
     if (msg != null) {
         if (msg == 'sucess') {
+
             Swal.fire(
                 'Pronto!',
                 'Usuário cadastrado!',
