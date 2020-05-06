@@ -1,7 +1,5 @@
 <html>
 <?php
-   require_once 'web/email/Email.php';
-    enviaEmail("jaquelira4@gmail.com", "Jaqueline teste");
 include("header.html");
 ?>
 <head>
@@ -22,7 +20,7 @@ include("header.html");
         crossorigin="anonymous"></script>
 </head>
 <body>
-<a href="web/email/Email.php" >teste</a>
+<a href="teste.php" >teste</a>
     <div class="container-fluid">
         <div class="form-group">
             <br>
