@@ -10,10 +10,10 @@ $email->SMTPDebug = 2;
 $email->isSMTP();
 $email->SMTPAuth = true;
 $email->Port = "587";
-$email->Host = "smtps.uol.com.br";
-$email->Username = "apnno@icloud.com";
+$email->Host = "smtp.scarmed.com.br";
+$email->Username = "contato@scarmed.com.br";
 $email->Password = "Scar2k19";
-$email->SetFrom("apnno@icloud.com" , "teste");
+$email->SetFrom("contato@scarmed.com.br" , "teste");
 
 $email->AddAddress("jaquelira4@gmail.com" , "teste"); //Já troquei aqui pra outra pessoa e também nada !
 $email->Subject = "Testando o envio";
