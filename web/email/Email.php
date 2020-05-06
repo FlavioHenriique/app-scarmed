@@ -5,35 +5,33 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Load Composer's autoloader
+require_once '../vendor/autoload.php';
 
-require_once 'web/vendor/autoload.php';
 function enviaEmail($destinatario, $nome){
     $mail = new PHPMailer(true);
 
     try {
         //Server settings
-        echo "enviando email";
-        $mail->SMTPDebug = 2;
-        $mail->isSMTP();                                            // Send using SMTP
-        $mail->Host       = 'smtp.scarmed.com.br';                    // Set the SMTP server to send through
-        $mail->Username   = 'apnno@icloud.com';                     // SMTP username
-        $mail->Password   = 'Scar2k19';                               // SMTP password
+        $email = new PHPMailer();
+        $email->SMTPDebug = 1;
+        $email->isSMTP();
+        $email->SMTPAuth = true;
+        $email->Port = 587;
+        $email->Host = "smtp.gmail.com";
+        $email->Username = "flaviohenrique638@gmail.com";
+        $email->SMTPSecure = PhpMailer::ENCRYPTION_STARTTLS;
+        $email->Password = "vowepcqqegxqihlp";
+        $email->SetFrom("flaviohenrique638@gmail.com" , "Scarmed");
 
-        //Recipients
-        $mail->setFrom('flaviohenrique638@gmail.com', 'Scarmed');
-        $mail->addAddress($destinatario);     // Add a recipient
+        $email->AddAddress($destinatario , $nome); //Já troquei aqui pra outra pessoa e também nada !
+        $email->Subject = "Cadastro no site Scarmed";
+        $email->MsgHTML("<h3>Olá $nome, você acabou de se cadastrar no site Scarmed</h3>");
 
-        $body = "Olá, $nome. Você acabou de se cadastrar no Scarmed, seja bem vindo!";
-        $mail->Body = $body;
-        $mail->isHTML(true);
-        $mail->Subject = "Cadastro no site Scarmed";
-        $mail->AltBody = strip_tags($body);
-
-        $mail->send();
-        echo 'Message has been sent';
+        $email->Send();
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        throw new Exception("Erro enviando email: " . $e->getMessage());
+    } finally {
+        $email->smtpClose();
     }
 }
 

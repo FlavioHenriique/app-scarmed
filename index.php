@@ -50,6 +50,7 @@ include("header.html");
     let msg = url.searchParams.get('message');
     if (msg != null) {
         if (msg == 'sucess') {
+
             Swal.fire(
                 'Pronto!',
                 'Usuário cadastrado!',

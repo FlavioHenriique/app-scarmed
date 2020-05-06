@@ -1,7 +1,6 @@
 <html>
 <?php
-
-
+include("header.html");
 ?>
 <head>
     <title>Cadastro de usuário</title>
