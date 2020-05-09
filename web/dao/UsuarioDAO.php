@@ -7,9 +7,8 @@ class UsuarioDAO{
 
     // Método responsável por salvar um usuário no banco de dados
     function salvar(Usuario $usuario){
-        if ($this->isUsuarioCadastrado($usuario->getCpf())) {
-            throw new Exception("Usuário já cadastrado");
-        }
+        $this->validaUsuario($usuario);
+
         $conn = getConnection();
         try{
             $sql = "";
@@ -56,12 +55,27 @@ class UsuarioDAO{
         }
     }
 
-    // Função responsável por identificar se um usuário já foi cadastrado através do CPF
-    function isUsuarioCadastrado($cpf){
+    // Função responsável por validar se um usuário pode ser cadastrado, verificando
+    // Se o CPF, telefone ou Email já foram cadastrados
+    function validaUsuario(Usuario $usuario){
         $conn = getConnection();
         try{
-            $sql = "SELECT * from USUARIO where CPF = '" . $cpf . "'";
-            return ($conn->query($sql)->num_rows > 0);
+            // Consultando por Email
+            $sql = "SELECT * from USUARIO where EMAIL = '" . $usuario->getEmail() . "'";
+            if ($conn->query($sql)->num_rows > 0){
+                throw new Exception("Já existe um usuário com este Email!");
+            }
+
+            // Consultando por CPF
+            $sql = "SELECT * from USUARIO where CPF = '" . $usuario->getCpf() . "'";
+            if ($conn->query($sql)->num_rows > 0){
+                throw new Exception("Já existe um usuário com este CPF!");
+            }
+            // Consultando por telefone
+            $sql = "SELECT * from USUARIO where TELEFONE = '" . $usuario->getTelefone() . "'";
+            if ($conn->query($sql)->num_rows > 0){
+                throw new Exception("Já existe um usuário com este telefone!");
+            }
         } finally {
             $conn->close();
         }
