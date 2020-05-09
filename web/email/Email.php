@@ -7,6 +7,12 @@ use PHPMailer\PHPMailer\Exception;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+/**
+ * @param $destinatario 'email de destino
+ * @param $nome 'nome do usuário que se cadastrou
+ * @param $idCadastro 'id de confirmação gerado no cadastro do usuário
+ * @throws Exception
+ */
 function enviaEmailConfirmacaoCadastro($destinatario, $nome, $idCadastro){
         $assunto = "Cadastro no site Scarmed";
 

@@ -50,6 +50,13 @@ if (isset($_POST['btn-login'])){
     }
 }
 
+/**
+ * Esta função é responsável por validar CPF e CEP do usuário e, caso estejam válidos,
+ * chamar o Dao de Usuário para cadastrá-lo no banco de dados
+ *
+ * @param Usuario $usuario ' objeto do Usuário que está sendo inserido
+ * @throws Exception
+ */
 function insereUsuario(Usuario $usuario){
     if (!isCPFValido($usuario->getCpf())) {
         throw new Exception("O CPF " . $usuario->getCpf() . " é inválido!");
@@ -61,11 +68,24 @@ function insereUsuario(Usuario $usuario){
     $dao->salvar($usuario);
 }
 
+/**
+ * Esta função é responsável por realizar o login através do método login da classe UsuarioDAO
+ *
+ * @param $identificador ' Identificador passado para o login, pode ser Email, CPF ou telefone
+ * @param $senha ' Senha para o login
+ * @return bool
+ */
 function login($identificador, $senha){
     $dao = new UsuarioDAO();
     return ($dao->login($identificador, $senha));
 }
 
+/**
+ * Esta função é responsável por validar um CPF
+ *
+ * @param $cpf ' CPF para ser validado
+ * @return bool
+ */
 function isCPFValido($cpf) {
     // Extrai somente os números
     $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
@@ -90,6 +110,12 @@ function isCPFValido($cpf) {
     return true;
 }
 
+/**
+ * Esta função é responsável por validar um CEP
+ *
+ * @param $cep 'CEP para ser validado
+ * @return bool
+ */
 function isCepValido($cep){
     if (($cep == "") or (strlen($cep) <> 8)) {
         return false;

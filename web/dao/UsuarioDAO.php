@@ -5,8 +5,13 @@ require_once __DIR__.'/../email/Email.php';
 
 class UsuarioDAO{
 
-    // Método responsável por salvar um usuário no banco de dados
-    function salvar(Usuario $usuario){
+    /**
+     * Método responsável por salvar um usuário no banco de dados
+     *
+     * @param Usuario $usuario Usuário a ser persistido
+     * @throws Exception
+     */
+    public function salvar(Usuario $usuario){
         $this->validaUsuario($usuario);
 
         $conn = getConnection();
@@ -35,10 +40,30 @@ class UsuarioDAO{
             if (mysqli_error($conn) != "") {
                 throw  new Exception(mysqli_error($conn));
             }
+
+            $this->insereConfirmacaoUsuario($usuario, $conn);
+
+            $conn->commit();
+        } finally {
+            $conn->rollback();
+            $conn->close();
+        }
+    }
+
+    /**
+     * Esta função é responsável por inserir um registro na tabela USUARIO_CONFIRMACAO
+     * e chamar o método para enviar um email de confirmação para o email cadastrado
+     *
+     * @param Usuario $usuario Objeto do usuário que está se cadastrando
+     * @param $conn  'Conexao' com o banco de dados passada como parâmetro
+     * @throws Exception
+     */
+    private function insereConfirmacaoUsuario(Usuario $usuario, $conn){
+        try{
             // O id de confirmação será, inicialmente, o email como MD5
             $idConfirmacao = md5($usuario->getEmail());
 
-            // Inserindo um registro na tabela USUARIOCONFIRMACAO
+            // Inserindo um registro na tabela USUARIO_CONFIRMACAO
             $sql = "INSERT INTO USUARIO_CONFIRMACAO (EMAIL, ID_CONFIRMACAO, CONFIRMADO)";
             $sql .= " values ('".$usuario->getEmail()."', '". $idConfirmacao ."', false);";
 
@@ -48,16 +73,19 @@ class UsuarioDAO{
             }
             // Enviando email de confirmação
             enviaEmailConfirmacaoCadastro($usuario->getEmail(), $usuario->getNome(), $idConfirmacao);
-            $conn->commit();
-        } finally {
-            $conn->rollback();
-            $conn->close();
+        }catch (Exception $e){
+            throw new Exception("Erro ao preparar email de confirmação: " . $e->getMessage());
         }
     }
 
-    // Função responsável por validar se um usuário pode ser cadastrado, verificando
-    // Se o CPF, telefone ou Email já foram cadastrados
-    function validaUsuario(Usuario $usuario){
+    /**
+     * Função responsável por validar se um usuário pode ser cadastrado, verificando
+     * Se o CPF, telefone ou Email já foram cadastrados
+     *
+     * @param Usuario $usuario Usuário a ser validado
+     * @throws Exception
+     */
+    private function validaUsuario(Usuario $usuario){
         $conn = getConnection();
         try{
             // Consultando por Email
@@ -81,8 +109,14 @@ class UsuarioDAO{
         }
     }
 
-    // Função responsável por verificar se um usuário está cadastrado através do email e senha
-    function login($identificador, $senha){
+    /**
+     * Função responsável por verificar se um usuário está cadastrado através do email e senha
+     *
+     * @param $identificador 'variavel passada como identificador, pode ser CPF, Email ou telefone'
+     * @param $senha
+     * @return bool
+     */
+    public function login($identificador, $senha){
         $conn = getConnection();
         try{
             // Verificando se o identificador é um EMAIL válido
@@ -118,9 +152,15 @@ class UsuarioDAO{
         }
     }
 
-    // Esta função é resposável por validar se o id Informado pertence a uma confirmação de email
-    // que está pendente
-    function validaConfirmacaoEmail($id){
+    /**
+     * Esta função é resposável por validar se o id Informado pertence a uma confirmação de email
+     * que está pendente
+     *
+     * @param $id Id de confirmação do usuário que foi enviado por email
+     * @return bool
+     * @throws Exception
+     */
+    public function validaConfirmacaoEmail($id){
         $conn = getConnection();
         try{
             $sql  = "SELECT";
