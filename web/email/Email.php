@@ -5,9 +5,33 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require_once '../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-function enviaEmail($destinatario, $nome){
+function enviaEmailConfirmacaoCadastro($destinatario, $nome, $idCadastro){
+        $assunto = "Cadastro no site Scarmed";
+
+        $msg = "<h3>Olá $nome, você acabou de se cadastrar no site Scarmed</h3>";
+        $msg .= "<br> Para confirmar seu cadastro, clique no link abaixo <br>";
+
+        $host = $_SERVER['HTTP_HOST'];
+        if ($host == 'localhost'){
+            $host .= '/app-scarmed';
+        }
+        $host .= '/confirmacaoEmail.php?id=';
+        $host .= $idCadastro;
+
+        $msg .= "<a href='".$host."'>Confirmação de cadastro no site Scarmed</a>";
+
+        enviaEmail($destinatario, $assunto, $msg);
+}
+
+function enviaEmailEsqueciSenha($destinatario, $nome){
+    $assunto = "Recuperação de senha";
+
+    $msg = "";
+}
+
+function enviaEmail($destinatario, $assunto, $msg){
     $mail = new PHPMailer(true);
 
     try {
@@ -18,14 +42,14 @@ function enviaEmail($destinatario, $nome){
         $email->SMTPAuth = true;
         $email->Port = 587;
         $email->Host = "smtp.gmail.com";
-        $email->Username = "flaviohenrique638@gmail.com";
+        $email->Username = "scarmedpb@gmail.com";
         $email->SMTPSecure = PhpMailer::ENCRYPTION_STARTTLS;
-        $email->Password = "vowepcqqegxqihlp";
+        $email->Password = "apvvijdbcqavwyxm";
         $email->SetFrom("flaviohenrique638@gmail.com" , "Scarmed");
 
-        $email->AddAddress($destinatario , $nome); //Já troquei aqui pra outra pessoa e também nada !
-        $email->Subject = "Cadastro no site Scarmed";
-        $email->MsgHTML("<h3>Olá $nome, você acabou de se cadastrar no site Scarmed</h3>");
+        $email->AddAddress($destinatario , '');
+        $email->Subject = $assunto;
+        $email->MsgHTML($msg);
 
         $email->Send();
     } catch (Exception $e) {

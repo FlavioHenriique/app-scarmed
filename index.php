@@ -1,5 +1,6 @@
 <html>
 <?php
+
 include("header.html");
 ?>
 <head>
@@ -38,11 +39,10 @@ include("header.html");
                     </div>
                 </div>
             </form>
-            <a href="cadastroUsuario.php">Cadastre-se</a>
+            <a href="cadastroUsuario.php">Cadastre-se   </a>
+            <a href="esqueciSenha.php">Esqueci minha senha</a>
         </div>
-
     </div>
-
 </body>
 <script>
     let url = new URL(window.location.href);
@@ -53,6 +53,12 @@ include("header.html");
             Swal.fire(
                 'Pronto!',
                 'Usuário cadastrado!',
+                'success'
+            );
+        } else if (msg == 'cadastroConfirmado'){
+            Swal.fire(
+                'Pronto!',
+                'Seu cadastro foi confirmado com sucesso!',
                 'success'
             );
         }else if (msg == 'error'){
