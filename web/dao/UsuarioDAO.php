@@ -205,4 +205,145 @@ class UsuarioDAO{
             $conn->close();
         }
     }
+
+    /**
+     * Esta função é responsável por retornar os dados de um usuário
+     * através do EMAIL passado
+     *
+     * @param $email ' Email do usuário
+     * @return bool
+     * @throws Exception
+     */
+    public function getDadosUsuario($email){
+        if ($email == "") {
+            throw new Exception("Email inválido");
+        }
+        $conn = getConnection();
+        try{
+            $sql  = " SELECT *";
+            $sql .= "\n from USUARIO";
+            $sql .= "\n where EMAIL = '$email'";
+            $sql .= "\n and ATIVO = true";
+            $result = $conn->query($sql);
+            if ($result->num_rows <= 0){
+                throw new Exception("Usuário não encontrado com o email $email");
+            }
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+
+            // Montando objeto Usuario
+            $usuario = new Usuario();
+            $usuario->setCpf($row['CPF']);
+            $usuario->setTelefone($row['TELEFONE']);
+            $usuario->setTipoInscricao($row['TIPO_INSCRICAO']);
+            $usuario->setInscricaoConselho($row['NUMERO_INSCRICAO']);
+            $usuario->setDataNascimento($row['DATA_NASCIMENTO']);
+            $usuario->setCep($row['CEP']);
+            $usuario->setEmail($row['EMAIL']);
+            $usuario->setNome($row['NOME']);
+
+            $result->close();
+
+            return $usuario;
+        } finally {
+            $conn->close();
+        }
+    }
+
+    /**
+     * Esta função é responsável por gerar um código de recuperação da senha para
+     * o usuário que solicitou, inserindo um registro na tabela USUARIO_RECUPERACAO_SENHA
+     *
+     * @param $email ' Email do usuário para recuperação de senha
+     * @return int ' Código gerado aleatoriamente
+     * @throws Exception
+     */
+    public function getCodigoRecuperacaoSenha($email){
+        if ($email == ""){
+            throw new Exception("Email inválido para recuperação de senha");
+        }
+        $conn = getConnection();
+        try{
+            $conn->autocommit(false);
+            // Código gerado aleatoriamente para recuperação
+            $codigo = random_int(1000, 9999);
+
+            $sql  = "INSERT INTO USUARIO_RECUPERACAO_SENHA";
+            $sql .= "\n (EMAIL, CODIGO_RECUPERACAO, CODIGO_VALIDO)";
+            $sql .= "\n values ('$email', $codigo, true)";
+            $conn->query($sql);
+
+            if (mysqli_error($conn) != "") {
+                throw  new Exception(mysqli_error($conn));
+            }
+            $conn->commit();
+            return $codigo;
+        } finally {
+            $conn->rollback();
+            $conn->close();
+        }
+    }
+
+    /**
+     * Esta função é responsável por confirmar o código digitado para troca
+     * da senha do usuário. Caso esteja correto, será alterado o registro de
+     * USUARIO_RECUPERACAO_SENHA para invalidar o código.
+     *
+     * @param $codigo ' Código digitado para verificar se está correto
+     * @param $email ' Email do usuário
+     * @throws Exception
+     */
+    public function confirmaCodigoSenha($codigo, $email){
+        if (($email == "") or ($codigo == 0)){
+            throw new Exception("Dados inválidos para confirmação da troca de senha");
+        }
+        $conn = getConnection();
+        try{
+            $conn->autocommit(false);
+            $sql  = " SELECT *";
+            $sql .= "\n from USUARIO_RECUPERACAO_SENHA";
+            $sql .= "\n where EMAIL = '$email' ";
+            $sql .= "\n and CODIGO_RECUPERACAO = $codigo and CODIGO_VALIDO = true";
+            error_log($sql);
+            $result = $conn->query($sql);
+            if ($result->num_rows <= 0){
+                throw  new Exception("O código de recuperação $codigo "
+                    ."para o email $email é inválido");
+            }
+            $id = $result->fetch_array(MYSQLI_ASSOC)['CODIGO'];
+
+            // Se existe um registro deste código para este email, deve inválidar no banco de dados
+            $sql  = " UPDATE USUARIO_RECUPERACAO_SENHA";
+            $sql .= "\n set CODIGO_VALIDO = false";
+            $sql .= "\n where CODIGO = $id";
+            $conn->query($sql);
+            $conn->commit();
+            $result->close();
+        } finally {
+            $conn->rollback();
+            $conn->close();
+        }
+    }
+
+    /**
+     *  Esta função é responsável por modificar a senha de um usuário
+     *
+     * @param $email ' Email do usuário para modificar a senha
+     * @param $senha ' Nova senha do usuário
+     * @throws Exception
+     */
+    public function modificaSenha($email, $senha){
+        $conn = getConnection();
+        try{
+            $sql  = "UPDATE USUARIO";
+            $sql .= "\n set SENHA = '$senha'";
+            $sql .= "\n where EMAIL = '$email'";
+            $conn->query($sql);
+            if (mysqli_error($conn) <> "") {
+                throw new Exception(mysqli_error($conn));
+            }
+        } finally {
+            $conn->rollback();
+            $conn->close();
+        }
+    }
 }

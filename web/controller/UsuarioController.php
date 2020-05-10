@@ -4,6 +4,31 @@ require_once __DIR__.'/../model/Usuario.php';
 require_once __DIR__.'/../dao/UsuarioDAO.php';
 
 if (isset($_POST['bt-cadastro-usuario'])){
+    processarRequisicaoCadastro();
+}
+
+if (isset($_POST['btn-login'])){
+    processarRequisicaoLogin();
+}
+
+if (isset($_POST['btn-esqueci-senha'])){
+    processarRequisicaoEsqueciSenha();
+}
+
+if (isset($_POST['btn-recupera-senha'])){
+    processarRequisicaoConfirmacaoCodigo();
+}
+
+if (isset($_POST['btn-nova-senha'])){
+    processarRequisicaoNovaSenha();
+}
+
+/**
+ * Esta função é responsável por processar a requisição do cadastro de um usuário,
+ * Montando o objeto do usuário para chamar a função insereUsuario
+ *
+ */
+function processarRequisicaoCadastro(){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $nome = $_POST['nome'];
@@ -35,7 +60,11 @@ if (isset($_POST['bt-cadastro-usuario'])){
     }
 }
 
-if (isset($_POST['btn-login'])){
+/**
+ * Esta função é responsável por processar a requisição de um login
+ *
+ */
+function processarRequisicaoLogin(){
     try{
         $identificador = $_POST['identificador'];
         $senha = $_POST['senha'];
@@ -47,6 +76,70 @@ if (isset($_POST['btn-login'])){
         }
     }catch (exception $e){
         header('Location: ../../index.php?message='.$e->getMessage());
+    }
+}
+
+/**
+ * Esta função é responsável por processar a requisição para recuperação de senha
+ */
+function processarRequisicaoEsqueciSenha(){
+    $email = $_POST['email'];
+    try{
+        $dao = new UsuarioDAO();
+
+        // Consultando dados do usuário, caso exista
+        $usuario = $dao->getDadosUsuario($email);
+        if ($usuario == null) {
+            throw new Exception("Usuário não encontrado");
+        }
+        // Obtendo o código de recuperação da senha
+        $codigo = $dao->getCodigoRecuperacaoSenha($usuario->getEmail());
+
+        enviaEmailEsqueciSenha($usuario->getEmail(), $usuario->getNome(), $codigo);
+
+        header('Location: ../../recuperacaoSenha.php?email='.$usuario->getEmail());
+    }catch (Exception $e){
+        header('Location: ../../esqueciMinhaSenha.php?message='.$e->getMessage());
+    }
+}
+
+/**
+ * Esta função é responsável por processar a requisição para confirmação
+ * do código para troca de senha
+ *
+ */
+function processarRequisicaoConfirmacaoCodigo(){
+    $codigo = $_POST['codigo'];
+    $email = $_POST['email'];
+    $dao = new UsuarioDAO();
+    try{
+        $dao->confirmaCodigoSenha($codigo, $email);
+        header('Location: ../../novaSenha.php?email='.$email);
+    }catch (Exception $e){
+        header('Location: ../../recuperacaoSenha.php?message='.$e->getMessage());
+    }
+
+}
+
+/**
+ * Esta função é responsável por processar a requisição do cadastro de uma nova senha
+ *
+ */
+function processarRequisicaoNovaSenha(){
+    $novaSenha = $_POST['senha'];
+    $confirmaSenha = $_POST['confirmaSenha'];
+    $email = $_POST['email'];
+    try{
+        if ($novaSenha <> $confirmaSenha){
+            throw new Exception("As senhas digitadas não são iguais");
+        }
+        $novaSenha = md5($novaSenha);
+        $dao = new UsuarioDAO();
+        $dao->modificaSenha($email, $novaSenha);
+
+        header("Location: ../../index.php?message=senhaCadastrada");
+    }catch (Exception $e){
+        header("Location: ../../novaSenha.php?email=$email&message=".$e->getMessage());
     }
 }
 

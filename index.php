@@ -1,7 +1,6 @@
 <html>
 <?php
-
-include("header.html");
+    include("header.html");
 ?>
 <head>
     <title>Scarmed - Evolução em Saúde</title>
@@ -39,8 +38,8 @@ include("header.html");
                     </div>
                 </div>
             </form>
-            <a href="cadastroUsuario.php">Cadastre-se   </a>
-            <a href="esqueciSenha.php">Esqueci minha senha</a>
+            <a href="cadastroUsuario.php">Cadastre-se</a>
+            <a href="esqueciMinhaSenha.php">Esqueci minha senha</a>
         </div>
     </div>
 </body>
@@ -59,6 +58,12 @@ include("header.html");
             Swal.fire(
                 'Pronto!',
                 'Seu cadastro foi confirmado com sucesso!',
+                'success'
+            );
+        } else if(msg == 'senhaCadastrada'){
+            Swal.fire(
+                'Pronto!',
+                'Sua nova senha foi cadastrada!',
                 'success'
             );
         }else if (msg == 'error'){
