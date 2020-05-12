@@ -18,10 +18,11 @@ class UsuarioDAO{
         try{
             $sql = "";
             $sql = "INSERT into USUARIO";
-            $sql .= " (ativo, nome, email, senha, cpf, cep, data_nascimento,";
+            $sql .= " (ativo, momento_cadastro, nome, email, senha, cpf, cep, data_nascimento,";
             $sql .= " tipo_inscricao, numero_inscricao, telefone)";
             $sql .= " values (";
-            $sql .= "false,";
+            $sql .= "false,"; // Usuário inicia como inativo, sendo necessário a confirmação no email
+            $sql .= "current_timestamp,"; // Momento do cadastro
             $sql .= "'" . $usuario->getNome() . "',";
             $sql .= "'" . $usuario->getEmail() . "',";
             $sql .= "'" . $usuario->getSenha() . "',";
@@ -124,9 +125,9 @@ class UsuarioDAO{
             $sql .= "where EMAIL = '". $identificador ."' ";
             $sql .= "and SENHA = '". $senha ."' ";
             $sql .= " and ATIVO = true";
-            error_log($sql, 0);
+
             if ($conn->query($sql)->num_rows > 0){
-                return true;
+                return $this->getDadosUsuario($identificador);
             }
 
             // Verificando se o identificador é um CPF válido
@@ -134,9 +135,11 @@ class UsuarioDAO{
             $sql .= " where CPF =  '$identificador'";
             $sql .= " and SENHA = '$senha'";
             $sql .= " and ATIVO = true";
-            error_log($sql, 0);
-            if ($conn->query($sql)->num_rows > 0){
-                return true;
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0){
+                $email = $result->fetch_array(MYSQLI_ASSOC)['EMAIL'];
+                $result->close();
+                return $this->getDadosUsuario($email);
             }
 
             // Verificando se o identificador é um TELEFONE válido
@@ -146,7 +149,13 @@ class UsuarioDAO{
             $sql .= " and ATIVO = true";
             error_log($sql, 0);
 
-            return ($conn->query($sql)->num_rows > 0);
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0){
+                $email = $result->fetch_array(MYSQLI_ASSOC)['EMAIL'];
+                $result->close();
+                return $this->getDadosUsuario($email);
+            }
+            return null;
         } finally {
             $conn->close();
         }

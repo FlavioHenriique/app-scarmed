@@ -23,6 +23,10 @@ if (isset($_POST['btn-nova-senha'])){
     processarRequisicaoNovaSenha();
 }
 
+if (isset($_POST['btn-sair'])){
+    processarRequisicaoSair();
+}
+
 /**
  * Esta função é responsável por processar a requisição do cadastro de um usuário,
  * Montando o objeto do usuário para chamar a função insereUsuario
@@ -56,7 +60,7 @@ function processarRequisicaoCadastro(){
         insereUsuario($usuario);
         header('Location: ../../cadastroUsuario.php?message=sucess');
     }catch(exception $e){
-        header('Location: ../../cadastroUsuario.php?message='.$e->getMessage());
+            header('Location: ../../cadastroUsuario.php?message='.$e->getMessage());
     }
 }
 
@@ -69,7 +73,11 @@ function processarRequisicaoLogin(){
         $identificador = $_POST['identificador'];
         $senha = $_POST['senha'];
         $senha = md5($senha);
-        if (login($identificador, $senha)) {
+        $user = login($identificador, $senha);
+        if ($user != null){
+            session_start();
+            $_SESSION['usuario'] = $user;
+
             header('Location: ../../index.php?message=sucess');
         }else{
             header('Location: ../../index.php?message=error');
@@ -142,6 +150,13 @@ function processarRequisicaoNovaSenha(){
         header("Location: ../../novaSenha.php?email=$email&message=".$e->getMessage());
     }
 }
+
+function processarRequisicaoSair(){
+    session_start();
+    $_SESSION['usuario'] = null;
+    header("Location: ../../index.php");
+}
+
 
 /**
  * Esta função é responsável por validar CPF e CEP do usuário e, caso estejam válidos,
