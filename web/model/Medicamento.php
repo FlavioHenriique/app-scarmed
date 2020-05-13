@@ -6,6 +6,23 @@ class Medicamento{
     private $ean1;
     private $bula;
     private $apresentacao;
+    private $laboratorio;
+
+    /**
+     * @return mixed
+     */
+    public function getLaboratorio()
+    {
+        return $this->laboratorio;
+    }
+
+    /**
+     * @param mixed $laboratorio
+     */
+    public function setLaboratorio($laboratorio)
+    {
+        $this->laboratorio = $laboratorio;
+    }
 
     /**
      * @return mixed

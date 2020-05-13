@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="form-group">
             <br>
             <?php
@@ -79,37 +79,35 @@
                 </div>
             </form>
         <br>
-        <?php
+        <div class="row">
+
+            <?php
             $arrayMedicamentos = $_SESSION['consulta'];
 
-        if ($arrayMedicamentos == null) {
-            echo "<h4>Nenhum medicamento foi encontrado!</h4>";
-        }else{
-                foreach ($arrayMedicamentos as $item){
-                    $ean = $item->getEAN1();
-                    ?>
-                    <div class="accordion" id="accordionMedicamento">
-                        <div class="card">
-                            <div class="card-title" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="btn" type="button" data-toggle="collapse" data-target="#<?php echo 'medicamento'.$ean;?>"
-                                            aria-expanded="true" aria-controls="collapseOne">
-                                        <?php echo utf8_encode($item->getNome()); ?>
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="<?php echo 'medicamento'.$ean;?>" class="collapse in" aria-labelledby="headingOne" data-parent="#accordionMedicamento">
-                                <div class="card-body">
-                                    <?php echo nl2br(utf8_encode($item->getBula())); ?>
-                                </div>
-                            </div>
-                        </div>
+            if ($arrayMedicamentos == null) {
+                echo "<h4>Nenhum medicamento foi encontrado!</h4>";
+            }else {
+            foreach ($arrayMedicamentos as $item) {
+                $ean = $item->getEAN1();
+            ?>
+                <div class="col-lg-4 col-md-4 col-sm-6" style="margin-bottom:20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $item->getNome();?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Apresentação:
+                            <?php echo utf8_encode($item->getApresentacao());?></h6>
+                        <p class="card-text">teste</p>
+                        <a href="medicamento.php?ean=<?php echo $ean; ?>" class="card-link">Visualizar medicamento</a>
                     </div>
-        <?php
+                </div>
+            </div>
+            <?php
                 }
             }
+            ?>
 
-        ?>
+        </div>
+    </div>
     </div>
 </body>
 <script>
