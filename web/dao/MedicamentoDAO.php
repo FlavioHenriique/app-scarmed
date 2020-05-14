@@ -13,13 +13,28 @@ class MedicamentoDAO{
      * @throws Exception
      */
     public function consultaMedicamentos($consulta){
-        $conn = getConnection();
         $consulta = strtoupper($consulta);
+        if (is_numeric($consulta)){
+            $medicamentos = array();
+            $medicamentos[] = $this->getDadosMedicamento($consulta);
+            return $medicamentos;
+        }
         try{
-            $sql  = " SELECT *";
+            $conn = getConnection();
+            $sql  = "( SELECT *";
             $sql .= " from MEDICAMENTO";
             $sql .= " where upper(NOME) like '%$consulta%'";
             $sql .= " and BULA is not null";
+            $sql .= " and APRESENTACAO like '% INJ %'"; // Consultando um item injetável (INJ)
+            $sql .= " limit 1)";
+            $sql .= "union";
+            $sql .= "( SELECT *";
+            $sql .= " from MEDICAMENTO";
+            $sql .= " where upper(NOME) like '%$consulta%'";
+            $sql .= " and BULA is not null";
+            $sql .= " and APRESENTACAO like '% X %'"; // Consultando um item de comprimido (X 14, X 18)
+            $sql .= " limit 1)";
+            error_log($sql);
             $result = $conn->query($sql);
             if (mysqli_error($conn)) {
                 throw new Exception(mysqli_error($conn));
@@ -61,6 +76,8 @@ class MedicamentoDAO{
             if (mysqli_error($conn)) {
                 throw new Exception(mysqli_error($conn));
             }
+            if ($result->num_rows <= 0)
+                throw new Exception("Produto com código de barras $ean não encontrado!");
             $row = $result->fetch_array(MYSQLI_ASSOC);
 
             $medicamento = new Medicamento();
