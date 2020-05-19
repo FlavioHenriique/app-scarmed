@@ -40,7 +40,8 @@
                             </div>
                             <br>
                             <label for="quantidade"><b>Quantidade (mg/ml):</b></label>
-                            <input type="number" class="form-control" required name="quantidade" id="quantidade">
+                            <input type="number" class="form-control" required name="quantidade" id="quantidade"
+                                   step="0.01" min="0" >
 
                             <label for="horas"><b>Horas:</b></label>
                             <input type="number" class="form-control" required name="horas" id="horas"
