@@ -12,7 +12,7 @@ class MedicamentoDAO{
      * @return array
      * @throws Exception
      */
-    public function consultaMedicamentos($consulta){
+    public function consultaMedicamentos($consulta, $filtro){
         $consulta = strtoupper($consulta);
         if (is_numeric($consulta)){
             $medicamentos = array();
@@ -21,19 +21,28 @@ class MedicamentoDAO{
         }
         try{
             $conn = getConnection();
-            $sql  = "( SELECT *";
-            $sql .= " from MEDICAMENTO";
-            $sql .= " where upper(NOME) like '%$consulta%'";
-            $sql .= " and BULA is not null";
-            $sql .= " and APRESENTACAO like '% INJ %'"; // Consultando um item injetável (INJ)
-            $sql .= " limit 1)";
-            $sql .= "union";
-            $sql .= "( SELECT *";
-            $sql .= " from MEDICAMENTO";
-            $sql .= " where upper(NOME) like '%$consulta%'";
-            $sql .= " and BULA is not null";
-            $sql .= " and APRESENTACAO like '% X %'"; // Consultando um item de comprimido (X 14, X 18)
-            $sql .= " limit 1)";
+            if ($filtro == 0){
+                $sql  = "( SELECT *";
+                $sql .= " from MEDICAMENTO";
+                $sql .= " where upper(NOME) like '%$consulta%'";
+                $sql .= " and APRESENTACAO like '% INJ %'"; // Consultando um item injetável (INJ)
+                $sql .= " limit 1)";
+                $sql .= "union";
+                $sql .= "( SELECT *";
+                $sql .= " from MEDICAMENTO";
+                $sql .= " where upper(NOME) like '%$consulta%'";
+                $sql .= " and APRESENTACAO like '% X %'"; // Consultando um item de comprimido (X 14, X 18)
+                $sql .= " limit 1)";
+            }else if($filtro == 1){
+                // Laboratório
+                $sql  = "SELECT *";
+                $sql .= " from MEDICAMENTO";
+                $sql .= " where upper(LABORATORIO) like '%$consulta%'";
+            }else if ($filtro == 2){
+                $sql  = "SELECT * ";
+                $sql .= " from MEDICAMENTO";
+                $sql .= " where upper(SUBSTANCIA) like '%$consulta%'";
+            }
             error_log($sql);
             $result = $conn->query($sql);
             if (mysqli_error($conn)) {
@@ -43,11 +52,11 @@ class MedicamentoDAO{
             $medicamentos = array();
             while ($row = $result->fetch_array(MYSQLI_ASSOC)){
                 $medicamento = new Medicamento();
-                $medicamento->setNome($row['NOME']);
-                $medicamento->setApresentacao($row['APRESENTACAO']);
-                $medicamento->setBula($row['BULA']);
+                $medicamento->setNome(utf8_encode($row['NOME']));
+                $medicamento->setApresentacao(utf8_encode($row['APRESENTACAO']));
+                $medicamento->setBula(utf8_encode($row['BULA']));
                 $medicamento->setEan1($row['EAN1']);
-                $medicamento->setLaboratorio($row['LABORATORIO']);
+                $medicamento->setLaboratorio(utf8_encode($row['LABORATORIO']));
                 $medicamentos[] = $medicamento;
             }
             $result->close();
@@ -81,11 +90,12 @@ class MedicamentoDAO{
             $row = $result->fetch_array(MYSQLI_ASSOC);
 
             $medicamento = new Medicamento();
-            $medicamento->setNome($row['NOME']);
-            $medicamento->setApresentacao($row['APRESENTACAO']);
-            $medicamento->setBula($row['BULA']);
+            $medicamento->setNome(utf8_encode($row['NOME']));
+            $medicamento->setApresentacao(utf8_encode($row['APRESENTACAO']));
+            $medicamento->setBula(utf8_encode($row['BULA']));
             $medicamento->setEan1($row['EAN1']);
-            $medicamento->setLaboratorio($row['LABORATORIO']);
+            $medicamento->setLaboratorio(utf8_encode($row['LABORATORIO']));
+            $medicamento->setSubstancias(explode(';', utf8_encode($row['SUBSTANCIA'])));
 
             $result->close();
 

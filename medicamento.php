@@ -11,13 +11,13 @@ require_once 'web/dao/MedicamentoDAO.php';
             throw new Exception("Produto inválido.");
         $dao = new MedicamentoDAO();
         $medicamento = $dao->getDadosMedicamento($ean);
+        unset($_SESSION['consulta']);
     }catch(Exception $e){
         header('Location: index.php?message='.$e->getMessage());
     }
-
 ?>
 <head>
-    <title>Detalhes - <?php echo utf8_encode($medicamento->getNome());?></title>
+    <title>Detalhes - <?php echo $medicamento->getNome();?></title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="img/icon.png">
@@ -36,17 +36,40 @@ require_once 'web/dao/MedicamentoDAO.php';
         <div class="row">
             <div class="card col-sm-10">
                 <div class="card-body">
-                    <h5 class="card-title"><b><?php echo utf8_encode($medicamento->getNome());?></b></h5>
+                    <h5 class="card-title"><b><?php echo $medicamento->getNome();?></b></h5>
                     <h6 class="card-subtitle mb-2 text-muted">Apresentação:
-                        <?php echo $medicamento->getApresentacao();?> </h6>
+                        <?php echo $medicamento->getApresentacao(); ?> </h6>
                     <br>
                     <h6 class="card-subtitle mb-2 text-muted">Laboratório:
-                        <?php echo utf8_encode($medicamento->getLaboratorio());?> </h6>
+                        <?php echo $medicamento->getLaboratorio();?> </h6>
                     <br>
-                    <p class="card-text"><?php echo nl2br(utf8_encode($medicamento->getBula()));?></p>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne" style="background-color: white;">
+                                <h5 class="mb-0">
+                                    <button class="btn " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Lista de substâncias
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse in" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <?php
+                                    for ($i = 0; $i < count($medicamento->getSubstancias()); $i ++){
+                                        echo '* '.$medicamento->getSubstancias()[$i]; ?> <br>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <h4 class="light">Bula</h4>
+                    <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
                 </div>
             </div>
-
         </div>
     </div>
 </body>

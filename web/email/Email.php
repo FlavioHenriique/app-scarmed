@@ -88,4 +88,3 @@ function enviaEmail($destinatario, $assunto, $msg){
         $email->smtpClose();
     }
 }
-

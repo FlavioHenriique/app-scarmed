@@ -21,3 +21,14 @@ Usuário comum
 Usuário não cadastrado
 	⁃	consulta comum a bulas por nome de substâncias ou medicação...
 	⁃	calculadora de dose
+
+
+
+CALCULADORA DE DOSE
+qtd comprimidos 1
+de quanta e quantas horas 8 em 8
+
+
+ml 2
+horas 12 e 12
+4 ml/dia

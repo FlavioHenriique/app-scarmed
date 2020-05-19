@@ -7,6 +7,7 @@ class Medicamento{
     private $bula;
     private $apresentacao;
     private $laboratorio;
+    private $substancias;
 
     /**
      * @return mixed
@@ -14,6 +15,22 @@ class Medicamento{
     public function getLaboratorio()
     {
         return $this->laboratorio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubstancias()
+    {
+        return $this->substancias;
+    }
+
+    /**
+     * @param mixed $substancias
+     */
+    public function setSubstancias($substancias)
+    {
+        $this->substancias = $substancias;
     }
 
     /**

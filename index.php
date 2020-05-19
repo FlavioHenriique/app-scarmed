@@ -1,8 +1,9 @@
 <html>
 <?php
-    include("header.php");
     require_once 'web/model/Medicamento.php';
     require_once 'web/model/Usuario.php';
+
+    include("header.php");
     session_start();
     if ($_GET['operation'] == "sair"){
         $_SESSION['usuario'] = null;
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="css/view/scarmed.css" />
     
     <!-- JAVASCRIPT -->
+    <script src="js/pooper.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -30,6 +32,7 @@
             <br>
             <?php
                 // Obtendo usuário da sessão, caso esteja logado
+                session_start();
                 $usuario = $_SESSION['usuario'];
                 if ($usuario == null) {
                     ?>
@@ -59,9 +62,17 @@
         <br><br>
             <form method="POST" action="web/controller/MedicamentoController.php" class="form-group">
                 <div class="row">
+                    <h4>Consulta de medicamentos</h4>
                     <div class="row col-sm-12">
-                        <h4>Consulta de medicamentos</h4>
-                        <div class="col-lg-10">
+                        <div class="col-lg-2">
+                            <select class="custom-select my-1 mr-sm-2" id="filtro" name="filtro">
+                                <option value="0" selected>Filtros...</option>
+                                <option value="1">Laboratório</option>
+                                <option value="2">Substância</option>
+                                <option value="3">Sintomas</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-8">
                             <input type="search" name="consulta" class="form-control" required
                                    placeholder="Nome do medicamento ou substância...">
                         </div>
@@ -72,30 +83,30 @@
                 </div>
             </form>
         <br>
+        <?php
+        $arrayMedicamentos = $_SESSION['consulta'];
+            if (count($arrayMedicamentos) > 0) {
+                echo "<h5>Número de medicamentos encontrados: (". count($arrayMedicamentos) .")</h5>";
+            }
+        ?>
         <div class="row">
-
             <?php
-            $arrayMedicamentos = $_SESSION['consulta'];
-
-            if ($arrayMedicamentos == null) {
-                echo "<h4>Nenhum medicamento foi encontrado!</h4>";
-            }else {
             foreach ($arrayMedicamentos as $item) {
                 $ean = $item->getEAN1();
             ?>
                 <div class="col-lg-4 col-md-4 col-sm-6" style="margin-bottom:20px;">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo utf8_encode($item->getNome());?></h5>
+                        <h5 class="card-title"><?php echo $item->getNome(); ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Apresentação:
-                            <?php echo utf8_encode($item->getApresentacao());?></h6>
+                            <?php echo utf8_encode($item->getApresentacao()); ?></h6>
                         <a href="medicamento.php?ean=<?php echo $ean; ?>" class="card-link">Visualizar detalhes e bula</a>
                     </div>
                 </div>
             </div>
             <?php
                 }
-            }
+            unset($_SESSION['consulta']);
             ?>
         </div>
     </div>
