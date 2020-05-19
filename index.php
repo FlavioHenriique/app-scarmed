@@ -85,15 +85,19 @@
         <br>
         <?php
         $arrayMedicamentos = $_SESSION['consulta'];
+        if ($arrayMedicamentos == null){
+            exit();
+        }
             if (count($arrayMedicamentos) > 0) {
                 echo "<h5>Número de medicamentos encontrados: (". count($arrayMedicamentos) .")</h5>";
             }
         ?>
         <div class="row">
             <?php
+            if ($arrayMedicamentos != null){
             foreach ($arrayMedicamentos as $item) {
                 $ean = $item->getEAN1();
-            ?>
+                ?>
                 <div class="col-lg-4 col-md-4 col-sm-6" style="margin-bottom:20px;">
                 <div class="card">
                     <div class="card-body">
@@ -106,6 +110,7 @@
             </div>
             <?php
                 }
+            }
             unset($_SESSION['consulta']);
             ?>
         </div>
