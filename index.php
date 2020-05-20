@@ -25,6 +25,44 @@
     <script src="js/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        $('.panel-collapse').collapse({
+            toggle: false
+        });
+
+        let url = new URL(window.location.href);
+        let msg = url.searchParams.get('message');
+        if (msg != null) {
+            if (msg == 'sucess') {
+                console.log("Usuário logado");
+            }else if (msg == 'cadastroConfirmado'){
+                Swal.fire(
+                    'Pronto!',
+                    'Seu cadastro foi confirmado com sucesso!',
+                    'success'
+                );
+            } else if(msg == 'senhaCadastrada'){
+                Swal.fire(
+                    'Pronto!',
+                    'Sua nova senha foi cadastrada!',
+                    'success'
+                );
+            }else if (msg == 'error'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro...',
+                    text: 'Usuário não cadastrado'
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro...',
+                    text: msg
+                });
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -115,44 +153,5 @@
             ?>
         </div>
     </div>
-    </div>
 </body>
-<script>
-    $('.panel-collapse').collapse({
-        toggle: false
-    });
-
-    let url = new URL(window.location.href);
-    let msg = url.searchParams.get('message');
-    if (msg != null) {
-        if (msg == 'sucess') {
-            console.log("Usuário logado");
-        }else if (msg == 'cadastroConfirmado'){
-            Swal.fire(
-                'Pronto!',
-                'Seu cadastro foi confirmado com sucesso!',
-                'success'
-            );
-        } else if(msg == 'senhaCadastrada'){
-            Swal.fire(
-                'Pronto!',
-                'Sua nova senha foi cadastrada!',
-                'success'
-            );
-        }else if (msg == 'error'){
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro...',
-                text: 'Usuário não cadastrado'
-            });
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Erro...',
-                text: msg
-            });
-        }
-    }
-</script>
-
 </html>

@@ -47,7 +47,7 @@ require_once 'web/dao/MedicamentoDAO.php';
                         <div class="card">
                             <div class="card-header" id="headingOne" style="background-color: white;">
                                 <h5 class="mb-0">
-                                    <button class="btn " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Lista de substâncias
                                     </button>
                                 </h5>
@@ -65,7 +65,66 @@ require_once 'web/dao/MedicamentoDAO.php';
                             </div>
                         </div>
                     </div>
-                    <br><br>
+                    <br>
+                    <?php
+                    // Lista de intercambialidade só deve ser liberada pra usuários logados
+                    if ($_SESSION['usuario'] != null){
+
+                        if (strtoupper($medicamento->getStatus()) == "NOVO"){
+                            echo "<h5 class='light'>Este medicamento é um ORIGINAL</h5>";
+                        }else{
+                            echo "<h5 class='light'>Este medicamento é um ".$medicamento->getStatus()."</h5>";
+                        }
+
+                        if ($medicamento->getOriginal() != null){
+
+                            $original = $medicamento->getOriginal();
+                            echo "Referência: ";
+                            ?>
+                            <a href="medicamento.php?ean=<?php echo $original->getEan1(); ?>">
+                                <?php echo $original->getNome(); ?><br>
+                            </a>
+                            <?php
+                        }else{
+                            if (strtoupper($medicamento->getStatus()) != "NOVO"){
+                                echo "Não foi encontrado um medicamento de Referência.<br>";
+                            }
+                        }
+                        ?>
+
+                        <?php
+                        if ($medicamento->getGenerico() != null){
+
+                            $generico = $medicamento->getGenerico();
+                            echo "Genérico - Princípio ativo: ";
+                        ?>
+                        <a href="medicamento.php?ean=<?php echo $generico->getEan1(); ?>">
+                            <?php echo $generico->getNome(); ?></a><br>
+                        <?php
+                        }else{
+                            if (strtoupper($medicamento->getStatus()) != "GENÉRICO"){
+                                echo "Não foi encontrado um medicamento Genérico.<br>";
+                            }
+                        }
+                        ?>
+
+                        <?php
+                        if ($medicamento->getSimilar() != null){
+                            $similar = $medicamento->getSimilar();
+                            echo "Similar - Equivalente Intercambiável: ";
+                            ?>
+                            <a href="medicamento.php?ean=<?php echo $similar->getEan1(); ?>">
+                                <?php echo $similar->getNome(); ?><br><br>
+                            </a>
+                            <?php
+                        }else{
+                            if (strtoupper($medicamento->getStatus()) != "SIMILAR"){
+                                echo "Não foi encontrado um equivalente intercambiável.<br>";
+                            }
+                        }
+                    }
+                    ?>
+                    <br>
                     <h4 class="light">Bula</h4>
                     <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
                 </div>

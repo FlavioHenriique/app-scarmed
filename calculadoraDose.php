@@ -54,11 +54,11 @@
                             <input type="submit" value="Calcular" name="bt-calcular" id="bt-calcular"
                                    class="btn btn-primary">
                         </form>
-
                         <?php
                         if ($_SESSION['resultado_calculadora'] <> ""){
-                            echo "<h4 class='light' style='text-align: center;'>"
-                                .$_SESSION['resultado_calculadora']."</h4>";
+                            $msg = str_replace(".", ",", $_SESSION['resultado_calculadora']);
+                            echo "<h4 class='light' style='text-align: center;'>Você precisa de "
+                                . $msg .".</h4>";
                             unset($_SESSION['resultado_calculadora']);
                         }
                         ?>

@@ -22,7 +22,8 @@ function processarRequisicaoConsultaMedicamento(){
         $_SESSION['consulta'] = $arrayMedicamentos;
         header('Location: ../../index.php');
     }catch (Exception $e){
-        header('Location: ../../index.php?message='.$e->getMessage());
+        header('Location: ../../index.php?message=erro');
+        //header('Location: ../../index.php?message='.$e->getMessage());
     }
 }
 
@@ -50,9 +51,9 @@ function processarRequisicaoCalculadoraDose(){
         $msg = "";
 
         if ($tipo == 1){ // Comprimido
-            $msg = "Você precisa de $resultado mg.";
+            $msg = "$resultado mg";
         }else if ($tipo == 2) { // Líquido
-            $msg = "Você precisa de $resultado ml.";
+            $msg = "$resultado ml";
         }else{
             throw new Exception("Tipo inválido");
         }

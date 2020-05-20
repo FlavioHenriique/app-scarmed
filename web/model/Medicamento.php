@@ -8,6 +8,26 @@ class Medicamento{
     private $apresentacao;
     private $laboratorio;
     private $substancias;
+    private $generico;
+    private $similar;
+    private $original;
+    private $status;
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 
     /**
      * @return mixed
@@ -15,6 +35,54 @@ class Medicamento{
     public function getLaboratorio()
     {
         return $this->laboratorio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGenerico()
+    {
+        return $this->generico;
+    }
+
+    /**
+     * @param mixed $generico
+     */
+    public function setGenerico($generico)
+    {
+        $this->generico = $generico;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSimilar()
+    {
+        return $this->similar;
+    }
+
+    /**
+     * @param mixed $similar
+     */
+    public function setSimilar($similar)
+    {
+        $this->similar = $similar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginal()
+    {
+        return $this->original;
+    }
+
+    /**
+     * @param mixed $original
+     */
+    public function setOriginal($original)
+    {
+        $this->original = $original;
     }
 
     /**

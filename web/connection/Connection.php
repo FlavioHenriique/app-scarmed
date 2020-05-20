@@ -20,7 +20,6 @@ function getConnection(){
         $dbpassword = "Scar2k19@";
         $db = "scarmed";
     }
-
     $mysqli = mysqli_connect($dbhost, $dbusername, $dbpassword, $db);
     return $mysqli;
 }
