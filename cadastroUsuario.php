@@ -74,7 +74,7 @@ include("header.php");
                     </select>
                     <br><br>
                     <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
-                    <a class="btn btn-secondary" href="index.php">Voltar ao login</a>
+                    <a class="btn btn-secondary" href="inicial.php">Voltar ao login</a>
                 </form>
             </div>
         </div>

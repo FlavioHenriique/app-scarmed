@@ -20,10 +20,9 @@ function processarRequisicaoConsultaMedicamento(){
         $arrayMedicamentos = $dao->consultaMedicamentos($consulta, $filtro);
 
         $_SESSION['consulta'] = $arrayMedicamentos;
-        header('Location: ../../index.php');
+        header('Location: ../../index.php#secaoConsulta');
     }catch (Exception $e){
-        header('Location: ../../index.php?message=erro');
-        //header('Location: ../../index.php?message='.$e->getMessage());
+        header('Location: ../../index.php?message='.$e->getMessage());
     }
 }
 

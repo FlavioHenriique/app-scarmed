@@ -13,7 +13,7 @@ require_once 'web/dao/MedicamentoDAO.php';
         $medicamento = $dao->getDadosMedicamento($ean);
         unset($_SESSION['consulta']);
     }catch(Exception $e){
-        header('Location: index.php?message='.$e->getMessage());
+        header('Location: inicial.php?message='.$e->getMessage());
     }
 ?>
 <head>
@@ -69,7 +69,6 @@ require_once 'web/dao/MedicamentoDAO.php';
                     <?php
                     // Lista de intercambialidade só deve ser liberada pra usuários logados
                     if ($_SESSION['usuario'] != null){
-
                         if (strtoupper($medicamento->getStatus()) == "NOVO"){
                             echo "<h5 class='light'>Este medicamento é um ORIGINAL</h5>";
                         }else{
