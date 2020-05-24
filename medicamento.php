@@ -70,7 +70,7 @@ require_once 'web/dao/MedicamentoDAO.php';
                     // Lista de intercambialidade só deve ser liberada pra usuários logados
                     if ($_SESSION['usuario'] != null){
                         if (strtoupper($medicamento->getStatus()) == "NOVO"){
-                            echo "<h5 class='light'>Este medicamento é um ORIGINAL</h5>";
+                            echo "<h5 class='light'>Este medicamento é de Referência</h5>";
                         }else{
                             echo "<h5 class='light'>Este medicamento é um ".$medicamento->getStatus()."</h5>";
                         }

@@ -73,7 +73,7 @@ include("header.php");
                         <option value="4">CFM - Conselho Federal de Medicina</option>
                     </select>
                     <br><br>
-                    <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-primary" />
+                    <input type="submit" name="bt-cadastro-usuario" value="Cadastrar" class="btn btn-success" />
                     <a class="btn btn-secondary" href="inicial.php">Voltar ao login</a>
                 </form>
             </div>

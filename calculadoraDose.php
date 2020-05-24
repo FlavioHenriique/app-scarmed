@@ -52,7 +52,7 @@
 
                             <br>
                             <input type="submit" value="Calcular" name="bt-calcular" id="bt-calcular"
-                                   class="btn btn-primary">
+                                   class="btn btn-success">
                         </form>
                         <?php
                         if ($_SESSION['resultado_calculadora'] <> ""){

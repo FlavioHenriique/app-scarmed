@@ -39,7 +39,7 @@ include("header.php");
                     </div>
                     <div class="col-sm-4">
                         <input type="submit" value="Cadastrar senha" name="btn-nova-senha"
-                               class="btn btn-primary btn-block">
+                               class="btn btn-success btn-block">
                     </div>
                 </div>
             </form>

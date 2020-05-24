@@ -28,7 +28,9 @@ CALCULADORA DE DOSE
 qtd comprimidos 1
 de quanta e quantas horas 8 em 8
 
+A1, A2 e A3 - amarela
+B1 - azul
+b2 - azul 2
+C2 - branca
+c3 - branca talidomida
 
-ml 2
-horas 12 e 12
-4 ml/dia

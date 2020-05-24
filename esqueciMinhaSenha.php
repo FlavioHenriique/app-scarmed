@@ -9,15 +9,14 @@
     <link rel="icon" type="image/png" href="img/icon.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/view/scarmed.css" />
 
     <!-- JAVASCRIPT -->
+    <script src="js/pooper.js"></script>
     <script src="js/sweetalert.min.js"></script>
-    <script src="js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -37,7 +36,7 @@
                         </div>
                         <div class="col-sm-4">
                             <input type="submit" value="Enviar email" name="btn-esqueci-senha"
-                                   class="btn btn-primary btn-block">
+                                   class="btn btn-success btn-block">
                         </div>
                     </div>
                 </form>

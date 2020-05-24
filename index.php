@@ -88,7 +88,7 @@ include("header.php");
                                            required placeholder="Consulta">
                                 </div>
                                 <div class="col-lg-12">
-                                    <input type="submit" class="btn btn-primary btn-lg float-right" value="Consultar"
+                                    <input type="submit" class="btn btn-success btn-lg float-right" value="Consultar"
                                            name="btn-consulta"/>
                                 </div>
                             </div>
