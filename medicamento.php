@@ -126,6 +126,45 @@ require_once 'web/dao/MedicamentoDAO.php';
                     <br>
                     <h4 class="light">Bula</h4>
                     <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
+                    <br>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne" style="background-color: white;">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseGrupoSubstancia"
+                                            aria-expanded="true" aria-controls="collapseGrupoSubstancia">
+                                        Tipo de receita: <?php echo $medicamento->getGrupoSubstancia();?>
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseGrupoSubstancia" class="collapse in"
+                                 aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                <?php
+                                if ($medicamento->getGrupoSubstancia() != null){
+                                    echo "Tipo de receita: <b>".$medicamento->getGrupoSubstancia()."</b><br>";
+                                    $caminhoImg = "";
+
+                                    if (strtoupper($medicamento->getGrupoSubstancia())[0] == "A")
+                                        $caminhoImg = "amarela.png";
+                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "B1")
+                                        $caminhoImg = "azul_b1.jpg";
+                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "B2")
+                                        $caminhoImg = "azul_b2.png";
+                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "C3")
+                                        $caminhoImg = "branca_c3.jpg";
+                                    else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
+                                        $caminhoImg = "branca.png";
+
+                                    echo "<img src='img/receitas/$caminhoImg'/>";
+                                }
+                                ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

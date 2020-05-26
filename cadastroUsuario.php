@@ -26,9 +26,9 @@ include("header.php");
 <body>
 <br>
     <div class="container">
-        <h3 class="light">Cadastro de usuário</h3>
         <div class="row">
             <div class="form-group col-md-8 col-sm-12 border rounded form-custom">
+                <h3 class="light">Cadastro de usuário</h3>
                 <!-- Form de cadastro de Usuário -->
                 <form method="POST" action="web/controller/UsuarioController.php">
                     <label for="nome">Nome</label>

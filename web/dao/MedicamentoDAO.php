@@ -95,6 +95,13 @@ class MedicamentoDAO{
         }
 }
 
+    /**
+     * Esta função é responsável por montar um objeto da classe Medicamento,
+     * baseado em uma linha obtida da consulta ao banco de dados.
+     *
+     * @param $row
+     * @return Medicamento
+     */
     public function montaObjetoMedicamento($row){
         $medicamento = new Medicamento();
         $medicamento->setNome(utf8_encode($row['NOME']));
@@ -106,11 +113,14 @@ class MedicamentoDAO{
         if ($medicamento->getStatus()[0] == "G"){
             $medicamento->setStatus("GENÉRICO");
         }
+        $medicamento->setGrupoSubstancia(utf8_encode($row['GRUPO_SUBSTANCIA']));
         return $medicamento;
     }
 
     /**
-     *
+     * Esta função é resposável por consultar os medicamentos para intercambialidade
+     * e adicionar ao medicamento retornado. Deve ser retornado um genério, um similar
+     * e um original.
      *
      * @param $ean
      * @param $conn

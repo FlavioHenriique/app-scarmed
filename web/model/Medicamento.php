@@ -2,6 +2,7 @@
 
 class Medicamento{
 
+
     public $nome;
     private $ean1;
     private $bula;
@@ -12,6 +13,22 @@ class Medicamento{
     private $similar;
     private $original;
     private $status;
+    private $grupoSubstancia;
+
+    /**
+     * @param mixed $grupoSubstancia
+     */
+    public function setGrupoSubstancia($grupoSubstancia)
+    {
+        $this->grupoSubstancia = $grupoSubstancia;
+    }
+    /**
+     * @return mixed
+     */
+    public function getGrupoSubstancia()
+    {
+        return $this->grupoSubstancia;
+    }
 
     /**
      * @return mixed
