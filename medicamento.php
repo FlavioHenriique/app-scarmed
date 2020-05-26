@@ -105,17 +105,15 @@ require_once 'web/dao/MedicamentoDAO.php';
                                 echo "Não foi encontrado um medicamento Genérico.<br>";
                             }
                         }
-                        ?>
 
-                        <?php
                         if ($medicamento->getSimilar() != null){
                             $similar = $medicamento->getSimilar();
                             echo "Similar - Equivalente Intercambiável: ";
-                            ?>
+                        ?>
                             <a href="medicamento.php?ean=<?php echo $similar->getEan1(); ?>">
                                 <?php echo $similar->getNome(); ?><br><br>
                             </a>
-                            <?php
+                        <?php
                         }else{
                             if (strtoupper($medicamento->getStatus()) != "SIMILAR"){
                                 echo "Não foi encontrado um equivalente intercambiável.<br>";
@@ -127,6 +125,9 @@ require_once 'web/dao/MedicamentoDAO.php';
                     <h4 class="light">Bula</h4>
                     <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
                     <br>
+                    <?php
+                    if (($_SESSION['usuario'] != null) and ($medicamento->getGrupoSubstancia() != null)){
+                    ?>
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header" id="headingOne" style="background-color: white;">
@@ -142,29 +143,27 @@ require_once 'web/dao/MedicamentoDAO.php';
                                  aria-labelledby="headingOne" data-parent="#accordion">
                                 <div class="card-body">
                                 <?php
-                                if ($medicamento->getGrupoSubstancia() != null){
-                                    echo "Tipo de receita: <b>".$medicamento->getGrupoSubstancia()."</b><br>";
-                                    $caminhoImg = "";
+                                echo "Tipo de receita: <b>".$medicamento->getGrupoSubstancia()."</b><br>";
+                                $caminhoImg = "";
 
-                                    if (strtoupper($medicamento->getGrupoSubstancia())[0] == "A")
-                                        $caminhoImg = "amarela.png";
-                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "B1")
-                                        $caminhoImg = "azul_b1.jpg";
-                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "B2")
-                                        $caminhoImg = "azul_b2.png";
-                                    else if (strtoupper($medicamento->getGrupoSubstancia()) == "C3")
-                                        $caminhoImg = "branca_c3.jpg";
-                                    else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
-                                        $caminhoImg = "branca.png";
+                                if (strtoupper($medicamento->getGrupoSubstancia())[0] == "A")
+                                    $caminhoImg = "amarela.png";
+                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "B1")
+                                    $caminhoImg = "azul_b1.jpg";
+                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "B2")
+                                    $caminhoImg = "azul_b2.png";
+                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "C3")
+                                    $caminhoImg = "branca_c3.jpg";
+                                else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
+                                    $caminhoImg = "branca.png";
 
-                                    echo "<img src='img/receitas/$caminhoImg'/>";
+                                echo "<img src='img/receitas/$caminhoImg'/>";
                                 }
                                 ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
