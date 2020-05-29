@@ -2,7 +2,6 @@
 require_once __DIR__.'/../model/Usuario.php';
 require_once __DIR__.'/../connection/Connection.php';
 require_once __DIR__.'/../email/Email.php';
-require_once __DIR__.'/../vendor/autoload.php';
 
 class UsuarioDAO{
 
@@ -275,7 +274,7 @@ class UsuarioDAO{
         try{
             $conn->autocommit(false);
             // Código gerado aleatoriamente para recuperação
-            $codigo = random_int(1000, 9999);
+            $codigo = rand(1000, 9999);
 
             $sql  = "INSERT INTO USUARIO_RECUPERACAO_SENHA";
             $sql .= "\n (EMAIL, CODIGO_RECUPERACAO, CODIGO_VALIDO)";
