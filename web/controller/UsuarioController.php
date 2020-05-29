@@ -2,7 +2,6 @@
 require_once __DIR__.'/../connection/Connection.php';
 require_once __DIR__.'/../model/Usuario.php';
 require_once __DIR__.'/../dao/UsuarioDAO.php';
-require_once __DIR__.'/../vendor/autoload.php';
 
 if (isset($_POST['bt-cadastro-usuario'])){
     processarRequisicaoCadastro();

@@ -23,7 +23,7 @@
         <h4 class="light">Recuperação de Senha</h4>
         <br>
         <div class="row">
-            <div class="col col-md-4">
+            <div class="col col-md-6">
                 <form class="form-group" method="POST" action="web/controller/UsuarioController.php">
                     <div class="row">
                         Para recuperar a sua senha, informe o email cadastrado.
