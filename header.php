@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="collapse_target">
         <a class="navbar-brand" href="index.php">
-            <img src="img/icon.png" width="35" height="30" class="d-inline-block align-top" alt="">
+            <img src="img/icon-min.png" width="30 height="30" class="d-inline-block align-top" alt="">
             <b>Scarmed</b>
         </a>
         <ul class="navbar-nav mr-auto">

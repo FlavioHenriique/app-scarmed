@@ -23,7 +23,6 @@ Usuário não cadastrado
 	⁃	calculadora de dose
 
 
-
 CALCULADORA DE DOSE
 qtd comprimidos 1
 de quanta e quantas horas 8 em 8
@@ -33,4 +32,3 @@ B1 - azul
 b2 - azul 2
 C2 - branca
 c3 - branca talidomida
-

@@ -12,7 +12,7 @@ include("header.php");
     <title>Scarmed - Evolução em Saúde</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="icon" type="image/png" href="img/icon-min.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -68,7 +68,7 @@ include("header.php");
                 </div>
                 <div class="col-md-7 col-sm-7 col-xs-7">
                     <br><br>
-                    <img src="img/scarmed.png" class="img-fluid rounded mx-auto d-block" alt="Responsive image"
+                    <img src="img/logo2-min.jpeg" class="img-fluid rounded mx-auto d-block" alt="Responsive image"
                          style="display:block; margin: 0 auto;">
                     <br>
                     <form method="POST" action="web/controller/MedicamentoController.php" class="form-group">

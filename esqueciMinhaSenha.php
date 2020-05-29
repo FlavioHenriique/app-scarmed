@@ -6,7 +6,7 @@
     <title>Scarmed- Recuperação de senha</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="icon" type="image/png" href="img/icon-min.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -19,7 +19,7 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <h4 class="light">Recuperação de Senha</h4>
         <br>
         <div class="row">

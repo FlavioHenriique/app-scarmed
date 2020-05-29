@@ -20,16 +20,16 @@ require_once 'web/dao/MedicamentoDAO.php';
     <title>Detalhes - <?php echo $medicamento->getNome();?></title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="icon" type="image/png" href="img/icon-min.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/view/scarmed.css" />
 
     <!-- JAVASCRIPT -->
-    <script src="js/sweetalert.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/pooper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -157,7 +157,8 @@ require_once 'web/dao/MedicamentoDAO.php';
                                 else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
                                     $caminhoImg = "branca.png";
 
-                                echo "<img src='img/receitas/$caminhoImg'/>";
+                                echo "<img src='img/receitas/$caminhoImg' data-toggle='popover' title='Teste - balão com informações' 
+                                       data-content='Conteúdo das informações' data-trigger='hover'/>";
                                 }
                                 ?>
                                 </div>
@@ -168,5 +169,12 @@ require_once 'web/dao/MedicamentoDAO.php';
             </div>
         </div>
     </div>
+
 </body>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+
 </html>
