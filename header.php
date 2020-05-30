@@ -3,7 +3,7 @@
     session_start();
     $usuario = $_SESSION['usuario'];
 ?>
-<nav class="navbar navbar-dark btn-success navbar-expand-md">
+<!--nav class="navbar navbar-dark btn-success navbar-expand-md">
     <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,4 +55,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav-->

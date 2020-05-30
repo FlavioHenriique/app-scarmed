@@ -153,7 +153,7 @@ require_once 'web/dao/MedicamentoDAO.php';
                                 else if (strtoupper($medicamento->getGrupoSubstancia()) == "B2")
                                     $caminhoImg = "azul_b2.png";
                                 else if (strtoupper($medicamento->getGrupoSubstancia()) == "C3")
-                                    $caminhoImg = "branca_c3.jpg";
+                                    $caminhoImg = "branca_c3.jpeg";
                                 else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
                                     $caminhoImg = "branca.png";
 
