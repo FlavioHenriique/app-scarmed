@@ -2,22 +2,53 @@
 require_once 'web/model/Medicamento.php';
 //include("header.php");
     session_start();
-    if ($_GET['operation'] == "sair"){
+    if ($_SESSION['acessoRestrito'] == null){
+        header("Location: construcao.php");
+    }
+    /*if ($_GET['operation'] == "sair"){
         $_SESSION['usuario'] = null;
         header("Location: index.php");
-}
+}*/
 ?>
 <html>
 <head>
     <title>Scarmed - Evolução em Saúde</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon-min.png">
+    <link rel="icon" type="image/png" href="img/icon2.png">
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/view/scarmed.css"/>
     <style>
+        .bouton-image:before {
+            content: "";
+            width: 50px;
+            height: 50px;
+            background-size: 100% 100%;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: text-top;
+            background-position : center center;
+            background-repeat:no-repeat;
+        }
+
+        .monBouton:before{
+            background-image : url("img/icon2.png");
+        }
+
+        .btn-rounded {
+            font-family: Verdana;
+            font-size: 20px;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 15px;
+            border-radius: 40px;
+            background: transparent;
+            transition: all 0.3s ease 0s;
+            padding: 5% 0;
+        }
+
         #footer {
             position:absolute;
             bottom:0;
@@ -28,15 +59,13 @@ require_once 'web/model/Medicamento.php';
         }
     </style>
 
-    <!-- JAVASCRIPT -->
-
-
 <body>
-<script src="js/sweetalert.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script src="js/pooper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
+    <!-- JAVASCRIPT -->
+    <script src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/pooper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
     $('.panel-collapse').collapse({
         toggle: false
     });
@@ -78,7 +107,8 @@ require_once 'web/model/Medicamento.php';
             <div class="col-12">
                 <div class="text-right">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-lg btn-success float-right"
+
+                        <button type="button" class="btn btn-lg btn-success float-right btn-rounded bouton-image monBouton"
                         style="background-color: #D2DE38;">Olá, faça seu login</button>
                         <button type="button" class="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split
                         float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

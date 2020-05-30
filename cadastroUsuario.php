@@ -6,7 +6,7 @@
     <title>Cadastro de usuário</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="img/icon-min.png">
+    <link rel="icon" href="img/icon.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">

@@ -6,7 +6,7 @@
     <title>Scarmed- Recuperação de senha</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="icon" type="image/png" href="img/icon2.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"

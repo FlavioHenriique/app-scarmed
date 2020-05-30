@@ -20,7 +20,7 @@ require_once 'web/dao/MedicamentoDAO.php';
     <title>Detalhes - <?php echo $medicamento->getNome();?></title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="img/icon-min.png">
+    <link rel="icon" type="image/png" href="img/icon.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">

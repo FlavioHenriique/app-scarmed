@@ -27,6 +27,10 @@ if (isset($_POST['btn-sair'])){
     processarRequisicaoSair();
 }
 
+if (isset($_POST['btn-acesso-restrito'])){
+    processarRequisicaoAcessoRestrito();
+}
+
 /**
  * Esta função é responsável por processar a requisição do cadastro de um usuário,
  * Montando o objeto do usuário para chamar a função insereUsuario
@@ -155,6 +159,40 @@ function processarRequisicaoSair(){
     session_start();
     $_SESSION['usuario'] = null;
     header("Location: ../../index.php");
+}
+
+function processarRequisicaoAcessoRestrito(){
+    // Dados de login - Paulo
+    $usuarioPaulo = "appno";
+    $senhaPaulo = "Formou2k20";
+
+    // Dados de login - Flavio
+    $usuarioFlavio = "flavio";
+    $senhaFlavio = "flavio";
+
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
+    $usuarioLogado = false;
+    try{
+        if (($usuario == $usuarioPaulo)and ($senha == $senhaPaulo)){
+            $usuarioLogado = true;
+        }
+        if (($usuario == $usuarioFlavio) and ($senha == $senhaFlavio)){
+            $usuarioLogado = true;
+        }
+        session_start();
+        if ($usuarioLogado == true){
+            $_SESSION['acessoRestrito'] = $usuario;
+            header("Location: ../../index.php");
+            exit();
+        }else{
+            throw new Exception("Usuário não encontrado");
+        }
+    }catch (Exception $e){
+
+        $_SESSION['acessoRestrito'] = null;
+        header("Location: ../../construcao.php?message=".$e->getMessage());
+    }
 }
 
 
