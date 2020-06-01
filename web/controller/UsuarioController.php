@@ -189,7 +189,6 @@ function processarRequisicaoAcessoRestrito(){
             throw new Exception("Usuário não encontrado");
         }
     }catch (Exception $e){
-
         $_SESSION['acessoRestrito'] = null;
         header("Location: ../../construcao.php?message=".$e->getMessage());
     }

@@ -20,6 +20,9 @@ require_once 'web/model/Medicamento.php';
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/view/scarmed.css"/>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         .bouton-image:before {
             content: "";
@@ -39,7 +42,7 @@ require_once 'web/model/Medicamento.php';
 
         .btn-rounded {
             font-family: Verdana;
-            font-size: 20px;
+            font-size: 15px;
             color: white;
             letter-spacing: 1px;
             line-height: 15px;
@@ -50,15 +53,34 @@ require_once 'web/model/Medicamento.php';
         }
 
         #footer {
-            position:absolute;
-            bottom:0;
             width:100%;
             height:auto;
             background: #0b2e13;
             color: white;
         }
-    </style>
+        ::-webkit-input-placeholder { /* Edge */
+            color: red;
+        }
 
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: red;
+        }
+
+        #consulta{
+            font-family: Verdana;
+            font-size: 30px;
+            background-color: green;
+            color: white;
+            width: 100%;
+            border: 0;
+            outline: none;
+        }
+
+        ::placeholder {
+            color: white;
+        }
+
+    </style>
 <body>
     <!-- JAVASCRIPT -->
     <script src="js/sweetalert.min.js"></script>
@@ -102,7 +124,15 @@ require_once 'web/model/Medicamento.php';
         }
     }
 </script>
-    <div class="container-fluid">
+    <?php
+        $arrayMedicamentos = $_SESSION['consulta'];
+        if ($arrayMedicamentos == null){
+            echo "<div class='container-fluid'>";
+        }else{
+            echo "<div class='container-fluid' style='position: relative;'>";
+        }
+    ?>
+        <button class="btn"><i class="bi bi-search"></i></button>
         <div class="row">
             <div class="col-12">
                 <div class="text-right">
@@ -132,7 +162,6 @@ require_once 'web/model/Medicamento.php';
             <div class="col-md-2">
             </div>
             <div class="col-md-8 col-sm-8 col-xs-8">
-                <br><br>
                 <img src="img/logo2-min.jpeg" class="img-fluid rounded mx-auto d-block"
                      alt="Responsive image" style="display:block; margin: 0 auto; width: 300; height: 180;"/>
                 <br>
@@ -164,25 +193,19 @@ require_once 'web/model/Medicamento.php';
             </div>
         </div>
         <div class="row">
-            <div class="col-12 btn-success">
+            <div class="col-12" style="background-color: green;">
                 <br>
-                <p class="text-center" style="font-family: Verdana; font-size: 30px;">
-                    <b>Sintomas, Substâncias, Intercambialidade? Qual sua dúvida?</b>
+                <form action="web/controller/MedicamentoController.php" method="POST">
+                    <input placeholder="Sintomas, Substâncias, Intercambialidade? Qual sua dúvida?"
+                           name="consulta" type="text" id="consulta"/>
+                    <p class="text-center" style="font-family: Verdana; font-size: 30px;">
+                    <input class="btn btn-primary" type="submit" value="Consulta" name="btn-consulta">
+                </form>
                 </p>
                 <br>
             </div>
         </div>
-        <div id="footer" class="row">
-            <div class="col-5">
-                Termos de uso e condições gerais
-            </div>
-            <div class="col-2" style="text-align: center;">
-                Scarmed | &#0169; 2020
-            </div>
-            <div class="col-5" style="text-align: right;">
-                Política de privacidade
-            </div>
-        </div>
+        <br>
 
         <!-- Modal login -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -214,8 +237,20 @@ require_once 'web/model/Medicamento.php';
         </div>
 
         <?php
-        $arrayMedicamentos = $_SESSION['consulta'];
         if ($arrayMedicamentos == null){
+            ?>
+            <div id="footer" class="row" style="position: absolute; bottom: 0;">
+                <div class="col-5">
+                    Termos de uso e condições gerais
+                </div>
+                <div class="col-2" style="text-align: center;">
+                    Scarmed | &#0169; 2020
+                </div>
+                <div class="col-5" style="text-align: right;">
+                    Política de privacidade
+                </div>
+            </div>
+        <?php
             exit();
         }
         if (count($arrayMedicamentos) > 0) {
@@ -241,11 +276,25 @@ require_once 'web/model/Medicamento.php';
                     </div>
                     <?php
                 }
+            ?>
+                <br><br>
+                <div id="footer" class="row">
+                    <div class="col-5">
+                        Termos de uso e condições gerais
+                    </div>
+                    <div class="col-2" style="text-align: center;">
+                        Scarmed | &#0169; 2020
+                    </div>
+                    <div class="col-5" style="text-align: right;">
+                        Política de privacidade
+                    </div>
+                </div>
+            <?php
             }
             unset($_SESSION['consulta']);
             ?>
         </div>
-
     </div>
-    </body>
+
+</body>
 </html>
