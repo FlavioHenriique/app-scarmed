@@ -1,58 +1,79 @@
+<style>
+    .bouton-image:before {
+        content: "";
+        width: 50px;
+        height: 50px;
+        background-size: 100% 100%;
+        display: inline-block;
+        margin-right: 5px;
+        vertical-align: text-top;
+        background-position : center center;
+        background-repeat:no-repeat;
+    }
+
+    .monBouton:before{
+        background-image : url("img/icon2.png");
+    }
+
+    .btn-rounded {
+        font-family: Verdana;
+        font-size: 15px;
+        color: white;
+        letter-spacing: 1px;
+        line-height: 15px;
+        border-radius: 40px;
+        background: transparent;
+        transition: all 0.3s ease 0s;
+        padding: 5% 0;
+    }
+</style>
 <?php
-    require_once 'web/model/Usuario.php';
+    require 'web/model/Usuario.php';
     session_start();
-    $usuario = $_SESSION['usuario'];
+    $usuario = unserialize(serialize($_SESSION['usuario']));
 ?>
-<!--nav class="navbar navbar-dark btn-success navbar-expand-md">
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapse_target">
-        <a class="navbar-brand" href="index.php">
-            <img src="img/icon-min.png" width="30 height="30" class="d-inline-block align-top" alt="">
-            <b>Scarmed</b>
-        </a>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="calculadoraDose.php">Calculadora de dose<span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="cadastroUsuario.php">Cadastre-se<span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="esqueciMinhaSenha.php">Recuperação de senha<span class="sr-only"></span></a>
-            </li>
-        </ul>
-        <ul style="list-style: none;">
-            <li class="nav-item">
-                <?php
-                if ($usuario != null){
-                    ?>
-                    <label style="color: white;"><b><?php echo "Olá, " . $usuario->getNome();?></b></label>
-                    &nbsp;&nbsp;
-                    <a style="color: white;" href="index.php?operation=sair">Sair</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="text-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-lg btn-success float-right btn-rounded bouton-image monBouton"
+                        style="background-color: #D2DE38;">
                     <?php
-                }else{
+                    if ($usuario != null){
+                        echo 'Olá, '.$usuario->getNome();
+                    }else {
+                        echo "Olá, faça seu login";
+                    }
                     ?>
-                    <form method="POST" action="web/controller/UsuarioController.php">
-                        <div class="row">
-                            <div>
-                                <input id="identificador" name="identificador" type="text" required
-                                       class="form-control form-control-sm" placeholder="Email, CPF ou telefone"/>
-                            </div>
-                            <div>
-                                <input id="senha" name="senha" type="password" required
-                                       class="form-control form-control-sm" placeholder="Senha"/>
-                            </div>
-                            <div>
-                                <input name="btn-login" type="submit" value="Login" class="btn btn-light btn-sm" />
-                            </div>
-                        </div>
-                    </form>
+                </button>
+                <button type="button" class="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split
+                    float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        data-trigger="hover" style="background-color: #D2DE38;">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+
+                <div class="dropdown-menu pull-right">
+                    <a class="dropdown-item btn-primary" data-toggle="modal"
+                       data-target="#loginModal">Login</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="cadastroUsuario.php">Cadastre-se</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="esqueciMinhaSenha.php">Esqueceu sua senha?</a>
+                    <div class="dropdown-divider"></div>
                     <?php
-                }
-                ?>
-            </li>
-        </ul>
+                      if ($usuario != null){
+                    ?>
+                      <form method="POST" action="web/controller/UsuarioController.php" id="formSair">
+                          <input type="submit" style="visibility: hidden;" name="btn-sair" id="btSair"/>
+                          <a class="dropdown-item" href="#"
+                             onclick="btSair.click();">Sair</a>
+                      </form>
+                    <?php
+                      }
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
-</nav-->
+</div>

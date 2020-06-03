@@ -1,8 +1,6 @@
-<html>
 <?php
-include("header.php");
-require_once 'web/model/Medicamento.php';
-require_once 'web/dao/MedicamentoDAO.php';
+    require_once 'web/model/Medicamento.php';
+    require_once 'web/dao/MedicamentoDAO.php';
 
     session_start();
     $ean = $_GET['ean'];
@@ -16,6 +14,7 @@ require_once 'web/dao/MedicamentoDAO.php';
         header('Location: inicial.php?message='.$e->getMessage());
     }
 ?>
+<html>
 <head>
     <title>Detalhes - <?php echo $medicamento->getNome();?></title>
     <meta charset="UTF-8" />
@@ -31,7 +30,61 @@ require_once 'web/dao/MedicamentoDAO.php';
     <script src="js/pooper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
+<?php
+    include("header.php");
+?>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <a href="index.php">
+                <img src="img/logo2-min.jpeg" class="img-fluid rounded mx-auto d-block"
+                     alt="Responsive image" style="display:block; margin: 0 auto; width: 200; height: 120;"/>
+            </a>
+            <br>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="background-color: green; color: white;">
+                <?php echo "<h4 class='text-center'>".$medicamento->getNome()."</h4>"; ?>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12" style="background-color: green; color: white;">
+                <h6 class="text-center">Remédios equivalentes</h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead style="background-color: green; color: white;">
+                    <tr>
+                        <th scope="col">Referência</th>
+                        <th scope="col">Princípio Ativo</th>
+                        <th scope="col">Equivalente intercambiável</th>
+                        <th scope="col">O que é intercambialidade?</th>
+                    </tr>
+                    </thead>
+                    <tr style="background-color: #D2DE38;">
+                        <th scope="col">Referência</th>
+                        <th scope="col">Princípio Ativo</th>
+                        <th scope="col">Equivalente intercambiável</th>
+                        <th scope="col">Listar todos</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="card col-sm-10">
