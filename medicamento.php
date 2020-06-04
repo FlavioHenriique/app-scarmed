@@ -49,22 +49,22 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12" style="background-color: green; color: white;">
+            <div class="col-12" style="background-color: #43a047; color: white;">
                 <?php echo "<h4 class='text-center'>".$medicamento->getNome()."</h4>"; ?>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-12" style="background-color: green; color: white;">
+            <div class="col-12" style="background-color: #43a047; color: white;">
                 <h6 class="text-center">Remédios equivalentes</h6>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12">
-                <table class="table">
+            <div class="table-responsive">
+                <table class="table table-bordered">
                     <thead style="background-color: green; color: white;">
                     <tr>
                         <th scope="col">Referência</th>
@@ -73,16 +73,57 @@
                         <th scope="col">O que é intercambialidade?</th>
                     </tr>
                     </thead>
-                    <tr style="background-color: #D2DE38;">
-                        <th scope="col">Referência</th>
+                    <tr style="background-color:#b2ff59 ;">
+                        <th scope="col">
+                            <?php
+                            if ($medicamento->getOriginal() != null) {
+                                $original = $medicamento->getOriginal();
+                                echo "<a href='medicamento.php?ean=".$original->getNome()
+                                    ."'>".$original->getNome()."</a>";
+                            }
+                            ?>
+                        </th>
                         <th scope="col">Princípio Ativo</th>
-                        <th scope="col">Equivalente intercambiável</th>
+                        <th scope="col">
+                            <?php
+                            if ($medicamento->getSimilar() != null){
+                                $similar = $medicamento->getSimilar();
+                                echo "<a href='medicamento.php?ean=".$similar->getNome()
+                                    ."'>".$similar->getNome()."</a>";
+                            }
+                            ?>
+                        </th>
                         <th scope="col">Listar todos</th>
                     </tr>
                 </table>
             </div>
-        </div>
 
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr style="width: 100%; color: black; height: 0.5px; background-color:black;" />
+                <h5 class="text-center"><b>SE PERSISTIREM OS SINTOMAS, PROCURE O <br>
+                        MÉDICO E O FARMACÊUTICO. LEIA A BULA.</b></h5><br>
+                <h6 class="text-center">Todas as informações contidas neste site têm a intenção de informar e educar, não pretendendo, de forma alguma,<br>
+                substituir as orientações de um profissional médico ou servir como recomendação para qualquer tipo de tratamento.<br>
+                Decisões relacionadas ao tratamento de pacientes devem ser tomadas por profissionais autorizados, considerando <br>
+                    as características particulares de cada pessoa.</h6><br>
+
+                <h6 class="text-center">Farmacêutico responsável: Dr. Antônio Paulo da Nóbrega Neto CRF/PB 5901 | Grupo APPNOBR ME | CNPJ/MF 01.001/0001-01 | <br>
+                Av. Ministro José Américo de Almeida, nº 1153, Sala 201, 1º Andar, Residencial Manoel Paulo da Costa | CEP 58040-300</h6>
+            </div>
+        </div>
+        <div id="footer" class="row">
+            <div class="col-5">
+                Termos de uso e condições gerais
+            </div>
+            <div class="col-2" style="text-align: center;">
+                Scarmed | &#0169; 2020
+            </div>
+            <div class="col-5" style="text-align: right;">
+                Política de privacidade
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -119,61 +160,7 @@
                         </div>
                     </div>
                     <br>
-                    <?php
-                    // Lista de intercambialidade só deve ser liberada pra usuários logados
-                    if ($_SESSION['usuario'] != null){
-                        if (strtoupper($medicamento->getStatus()) == "NOVO"){
-                            echo "<h5 class='light'>Este medicamento é de Referência</h5>";
-                        }else{
-                            echo "<h5 class='light'>Este medicamento é um ".$medicamento->getStatus()."</h5>";
-                        }
 
-                        if ($medicamento->getOriginal() != null){
-
-                            $original = $medicamento->getOriginal();
-                            echo "Referência: ";
-                            ?>
-                            <a href="medicamento.php?ean=<?php echo $original->getEan1(); ?>">
-                                <?php echo $original->getNome(); ?><br>
-                            </a>
-                            <?php
-                        }else{
-                            if (strtoupper($medicamento->getStatus()) != "NOVO"){
-                                echo "Não foi encontrado um medicamento de Referência.<br>";
-                            }
-                        }
-                        ?>
-
-                        <?php
-                        if ($medicamento->getGenerico() != null){
-
-                            $generico = $medicamento->getGenerico();
-                            echo "Genérico - Princípio ativo: ";
-                        ?>
-                        <a href="medicamento.php?ean=<?php echo $generico->getEan1(); ?>">
-                            <?php echo $generico->getNome(); ?></a><br>
-                        <?php
-                        }else{
-                            if (strtoupper($medicamento->getStatus()) != "GENÉRICO"){
-                                echo "Não foi encontrado um medicamento Genérico.<br>";
-                            }
-                        }
-
-                        if ($medicamento->getSimilar() != null){
-                            $similar = $medicamento->getSimilar();
-                            echo "Similar - Equivalente Intercambiável: ";
-                        ?>
-                            <a href="medicamento.php?ean=<?php echo $similar->getEan1(); ?>">
-                                <?php echo $similar->getNome(); ?><br><br>
-                            </a>
-                        <?php
-                        }else{
-                            if (strtoupper($medicamento->getStatus()) != "SIMILAR"){
-                                echo "Não foi encontrado um equivalente intercambiável.<br>";
-                            }
-                        }
-                    }
-                    ?>
                     <br>
                     <h4 class="light">Bula</h4>
                     <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
@@ -221,8 +208,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </body>
 <script>
     $(function () {

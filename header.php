@@ -26,6 +26,13 @@
         transition: all 0.3s ease 0s;
         padding: 5% 0;
     }
+
+    #footer {
+        width:100%;
+        height:auto;
+        background: #0b2e13;
+        color: white;
+    }
 </style>
 <?php
     require 'web/model/Usuario.php';
@@ -74,6 +81,35 @@
                     ?>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal login -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="web/controller/UsuarioController.php">
+                <div class="modal-body">
+                    <div class="row">
+                        <input id="identificador" name="identificador" type="text" required
+                               class="form-control form-control-sm" placeholder="Informe Email, CPF ou telefone"/>
+                        <br><br>
+                        <input id="senha" name="senha" type="password" required
+                               class="form-control form-control-sm" placeholder="Senha"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-success" value="Login" name="btn-login">
+                </div>
+            </form>
         </div>
     </div>
 </div>
