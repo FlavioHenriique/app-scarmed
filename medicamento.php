@@ -78,17 +78,25 @@
                             <?php
                             if ($medicamento->getOriginal() != null) {
                                 $original = $medicamento->getOriginal();
-                                echo "<a href='medicamento.php?ean=".$original->getNome()
+                                echo "<a href='medicamento.php?ean=".$original->getEan1()
                                     ."'>".$original->getNome()."</a>";
                             }
                             ?>
                         </th>
-                        <th scope="col">Princípio Ativo</th>
+                        <th scope="col">
+                            <?php
+                            if ($medicamento->getGenerico() != null){
+                                $similar = $medicamento->getGenerico();
+                                echo "<a href='medicamento.php?ean=".$similar->getEan1()
+                                    ."'>".$similar->getNome()."</a>";
+                            }
+                            ?>
+                        </th>
                         <th scope="col">
                             <?php
                             if ($medicamento->getSimilar() != null){
                                 $similar = $medicamento->getSimilar();
-                                echo "<a href='medicamento.php?ean=".$similar->getNome()
+                                echo "<a href='medicamento.php?ean=".$similar->getEan1()
                                     ."'>".$similar->getNome()."</a>";
                             }
                             ?>

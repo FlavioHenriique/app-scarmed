@@ -140,13 +140,13 @@ require_once 'web/model/Medicamento.php';
             ?>
             <div id="footer" class="row" style="position: absolute; bottom: 0;">
                 <div class="col-5">
-                    Termos de uso e condições gerais
+                    <a href="termosECondicoes.php" style="color: white;">Termos de uso e condições gerais</a>
                 </div>
                 <div class="col-2" style="text-align: center;">
                     Scarmed | &#0169; 2020
                 </div>
                 <div class="col-5" style="text-align: right;">
-                    Política de privacidade
+                    <a href="politicaPrivacidade.php" style="color: white;">Política de privacidade</a>
                 </div>
             </div>
         <?php
@@ -179,13 +179,13 @@ require_once 'web/model/Medicamento.php';
                 <br><br>
                 <div id="footer" class="row">
                     <div class="col-5">
-                        Termos de uso e condições gerais
+                        <a href="termosECondicoes.php" style="color: white;">Termos de uso e condições gerais</a>
                     </div>
                     <div class="col-2" style="text-align: center;">
                         Scarmed | &#0169; 2020
                     </div>
                     <div class="col-5" style="text-align: right;">
-                        Política de privacidade
+                        <a href="politicaPrivacidade.php" style="color: white;">Política de privacidade</a>
                     </div>
                 </div>
             <?php
