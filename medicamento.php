@@ -30,7 +30,19 @@
     <script src="js/pooper.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
+<style>
+    .medicamentos{
+        background-color: #43a047;
+        color: white;
+    }
 
+    .linha{
+        width: 100%;
+        color: black;
+        height: 0.5px;
+        background-color:black;
+    }
+</style>
 <body>
 <?php
     include("header.php");
@@ -51,13 +63,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12" style="background-color: #43a047; color: white;">
+            <div class="col-12 medicamentos">
                 <?php echo "<h4 class='text-center'>".$medicamento->getNome()."</h4>"; ?>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-12" style="background-color: #43a047; color: white;">
+            <div class="col-12 medicamentos">
                 <h6 class="text-center">Remédios equivalentes</h6>
             </div>
         </div>
@@ -70,7 +82,11 @@
                         <th scope="col">Referência</th>
                         <th scope="col">Princípio Ativo</th>
                         <th scope="col">Equivalente intercambiável</th>
-                        <th scope="col">O que é intercambialidade?</th>
+                        <th scope="col">
+                            <a href="intercambialidade.php" style="color: white;">
+                                O que é intercambialidade?
+                            </a>
+                        </th>
                     </tr>
                     </thead>
                     <tr style="background-color:#b2ff59 ;">
@@ -105,11 +121,101 @@
                     </tr>
                 </table>
             </div>
-
         </div>
         <div class="row">
+            <div class="col-12 medicamentos">
+                <h6 class="text-center">Bula</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <?php echo "<h4><b>".$medicamento->getNome()."</b></h4>"; ?>
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-success">Bula do profissional</a>
+            </div>
+        </div>
+
+        <hr class="linha">
+
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Fabricante</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Precisa de Receita</th>
+                        <th scope="col">Tipo de Receita</th>
+                        <th scope="col">Categoria</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <th><?php echo $medicamento->getNome(); ?></th>
+                        <th><?php echo $medicamento->getLaboratorio(); ?></th>
+                        <!-- TIPO DE RECEITA -->
+                        <th>
+                            <?php
+                                if ($medicamento->getOriginal() == null){
+                                    echo "Referência";
+                                }else if ($medicamento->getSimilar() == null){
+                                    echo "Similar";
+                                }else if ($medicamento->getGenerico() == null){
+                                    echo "Genérico";
+                                }
+                            ?>
+                        </th>
+                        <!-- PRECISA DE RECEITA? -->
+                        <th>
+                            <?php
+                                $grupos = array("A1","A2","A3","B1","B2","C1","C2","C3","C4","C5","D1","D2");
+                                $precisaDeReceita = in_array(strtoupper($medicamento->getGrupoSubstancia()), $grupos);
+                                if ($precisaDeReceita == true){
+                                    echo "SIM";
+                                }else{
+                                    echo "NÃO";
+                                }
+                            ?>
+                        </th>
+                        <!--TIPO DE RECEITA -->
+                        <th>
+                            <?php
+                            $grupo = strtoupper($medicamento->getGrupoSubstancia());
+                                if ($precisaDeReceita == true){
+                                    if ($grupo[0] = "A"){
+                                        echo "Amarela";
+                                    }else if ($grupo == "B1"){
+                                        echo "Azul B1";
+                                    }else if ($grupo == "B2"){
+                                        echo "Azul B2";
+                                    }else if ($grupo == "C3"){
+                                        echo "Branca C3";
+                                    }
+                                }else{
+                                    echo "-";
+                                }
+                            ?>
+                        </th>
+                        <th>-</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <hr class="linha">
+
+        <div class="row">
             <div class="col-12">
-                <hr style="width: 100%; color: black; height: 0.5px; background-color:black;" />
+                <?php echo "<h5><b>".$medicamento->getNome().", para o que é indicado e para que serve?</b></h5>"; ?>
+                <br>
+                Informações da bula aqui ...
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12" align="justify">
+                <hr class="linha" />
                 <h5 class="text-center"><b>SE PERSISTIREM OS SINTOMAS, PROCURE O <br>
                         MÉDICO E O FARMACÊUTICO. LEIA A BULA.</b></h5><br>
                 <h6 class="text-center">Todas as informações contidas neste site têm a intenção de informar e educar, não pretendendo, de forma alguma,<br>
@@ -123,101 +229,17 @@
         </div>
         <div id="footer" class="row">
             <div class="col-5">
-                Termos de uso e condições gerais
+                <a href="termosECondicoes.php" style="color: white;">Termos de uso e condições gerais</a>
             </div>
             <div class="col-2" style="text-align: center;">
                 Scarmed | &#0169; 2020
             </div>
             <div class="col-5" style="text-align: right;">
-                Política de privacidade
+                <a href="politicaPrivacidade.php" style="color: white;">Política de privacidade</a>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="card col-sm-10">
-                <div class="card-body">
-                    <h5 class="card-title"><b><?php echo $medicamento->getNome();?></b></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Apresentação:
-                        <?php echo $medicamento->getApresentacao(); ?> </h6>
-                    <br>
-                    <h6 class="card-subtitle mb-2 text-muted">Laboratório:
-                        <?php echo $medicamento->getLaboratorio();?> </h6>
-                    <br>
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header" id="headingOne" style="background-color: white;">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Lista de substâncias
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="collapseOne" class="collapse in" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                    <?php
-                                    for ($i = 0; $i < count($medicamento->getSubstancias()); $i ++){
-                                        echo '* '.$medicamento->getSubstancias()[$i]; ?> <br>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <br>
-                    <h4 class="light">Bula</h4>
-                    <p class="card-text"><?php echo nl2br($medicamento->getBula());?></p>
-                    <br>
-                    <?php
-                    if (($_SESSION['usuario'] != null) and ($medicamento->getGrupoSubstancia() != null)){
-                    ?>
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header" id="headingOne" style="background-color: white;">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseGrupoSubstancia"
-                                            aria-expanded="true" aria-controls="collapseGrupoSubstancia">
-                                        Tipo de receita: <?php echo $medicamento->getGrupoSubstancia();?>
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="collapseGrupoSubstancia" class="collapse in"
-                                 aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body">
-                                <?php
-                                echo "Tipo de receita: <b>".$medicamento->getGrupoSubstancia()."</b><br>";
-                                $caminhoImg = "";
-
-                                if (strtoupper($medicamento->getGrupoSubstancia())[0] == "A")
-                                    $caminhoImg = "amarela.png";
-                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "B1")
-                                    $caminhoImg = "azul_b1.jpg";
-                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "B2")
-                                    $caminhoImg = "azul_b2.png";
-                                else if (strtoupper($medicamento->getGrupoSubstancia()) == "C3")
-                                    $caminhoImg = "branca_c3.jpeg";
-                                else if (strtoupper($medicamento->getGrupoSubstancia())[0] == "C")
-                                    $caminhoImg = "branca.png";
-
-                                echo "<img src='img/receitas/$caminhoImg' data-toggle='popover' title='Teste - balão com informações' 
-                                       data-content='Conteúdo das informações' data-trigger='hover'/>";
-                                }
-                                ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </body>
 <script>
     $(function () {

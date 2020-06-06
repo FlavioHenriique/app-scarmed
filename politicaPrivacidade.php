@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="card col-sm-12">
-            <div class="card-body">
+            <div class="card-body" align="justify">
                 <h4 class="card-title"><b>POLÍTICA DE PRIVACIDADE DO CONSULTA REMÉDIOS</b></h4>
 
                 Antes de cadastrar ou de navegar pelo site leia com atenção a esta política de privacidade que dispõe sobre como seus dados pessoais poderão ser utilizados pelo Consulta Remédios. Encorajamos que todos os Usuários ou visitantes leiam com atenção a este documento, mas, como forma de facilitar a visualização de como utilizamos seus dados pessoais, apresentamos o seguinte quadro resumo:

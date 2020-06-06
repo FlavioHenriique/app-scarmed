@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="card col-sm-12">
-                <div class="card-body">
+                <div class="card-body" align="justify">
                     <h4 class="card-title"><b>TERMOS DE USO E CONDIÇÕES GERAIS - Scarmed</b></h4>
 
                     Seja bem-vindo(a) ao Scarmed! Neste documento, apresentaremos as principais condições de uso de nossa Plataforma. Os presentes Termos de Uso poderão ser atualizados pelo Scarmed a qualquer momento. Em caso de atualização, iremos divulgar em nossa Plataforma as principais alterações, sendo que os usuários cadastrados receberão aviso por email e demais canais de contato.
