@@ -20,27 +20,30 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container-fluid">
-    <h4 class="light">Recuperação de Senha</h4>
-    <br>
-    <div class="row">
-        <div class="col col-md-4">
-            <form class="form-group" method="POST" action="web/controller/UsuarioController.php">
-                <div class="row">
-                    Informe o código de recuperação enviado para o email
-                    <b><?php echo $_GET['email']; ?></b>
-                    <br><br>
-                    <div class="col-sm-8">
-                        <input type="number" name="codigo" class="form-control input-sm"
-                               placeholder="Código" required>
-                        <input type="hidden" name="email" value="<?php echo $_GET['email'];?>" />
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="submit" value="Enviar código" name="btn-recupera-senha"
-                               class="btn btn-primary btn-block">
-                    </div>
+<div class="container">
+    <div class="card col-sm-12">
+        <div class="card-body">
+            <h4 class="light">Recuperação de Senha</h4>
+            <br>
+            <div class="row">
+                <div class="col col-md-6">
+                    <form class="form-group" method="POST" action="web/controller/UsuarioController.php">
+                        <div class="row">
+                            Informe o código de recuperação enviado para o email
+                            <br><br>
+                            <div class="col-sm-8">
+                                <input type="number" name="codigo" class="form-control input-sm"
+                                       placeholder="Código" required>
+                                <input type="hidden" name="email" value="<?php echo $_GET['email'];?>" />
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="submit" value="Enviar código" name="btn-recupera-senha"
+                                       class="btn btn-success btn-block">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

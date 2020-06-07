@@ -12,9 +12,9 @@
 <body>
     <div class="container">
         <div class="card col-sm-12">
-            <div class="card-body" align="justify">
+            <div class="card-body">
                 <h4 class="card-title"><b>POLÍTICA DE PRIVACIDADE DO CONSULTA REMÉDIOS</b></h4>
-
+                <div align="justify">
                 Antes de cadastrar ou de navegar pelo site leia com atenção a esta política de privacidade que dispõe sobre como seus dados pessoais poderão ser utilizados pelo Consulta Remédios. Encorajamos que todos os Usuários ou visitantes leiam com atenção a este documento, mas, como forma de facilitar a visualização de como utilizamos seus dados pessoais, apresentamos o seguinte quadro resumo:
                 <br>
                 • Controlador dos dados coletados: DROGARIAS ON LINE AGÊNCIA DE FARMÁCIAS LTDA., pessoa jurídica de direito privado, inscrita no CNPJ/MF sob o n° 08.434.085/0001-28, com sede no município de Curitiba, Estado do Paraná, na Rua Pasteur, nº. 463, conjunto 1301, 13º andar, Condomínio e Edifício Centro Empresarial Jatobá, CEP 80250-104.
@@ -199,6 +199,7 @@
                 Visitantes que não possuam cadastro na Plataforma, podem utilizar nosso canal de CONTATO para requerer algum dos direitos previstos no Capítulo 4, se cabível. Os Usuários cadastrados também podem entrar em contato para fazer requerimentos.
 
                 Data de última atualização: 22/07/2019
+                </div>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+console.log("cadastrousuarojs");
 // Iniciando Datepicker
 $(document).ready(function(){
     var date_input=$('input[name="data"]');
@@ -21,8 +22,8 @@ let msg = url.searchParams.get('message');
 if (msg != null) {
     if (msg == 'sucess') {
         Swal.fire(
-            'Pronto!',
-            'Usuário cadastrado com sucesso!',
+            'Usuário cadastrado com sucesso',
+            'Foi enviado um email de confirmação, por favor, verifique sua Caixa de Entrada.',
             'success'
         );
     }else{

@@ -21,26 +21,30 @@
 </head>
 <body>
     <div class="container">
-        <h4 class="light">Recuperação de Senha</h4>
-        <br>
-        <div class="row">
-            <div class="col col-md-6">
-                <form class="form-group" method="POST" action="web/controller/UsuarioController.php">
-                    <div class="row">
-                        Para recuperar a sua senha, informe o email cadastrado.
-                        <br>
-                        Será enviado um código de verificação para o seu email.
-                        <br><br>
-                        <div class="col-sm-8">
-                            <input type="email" name="email" class="form-control input-sm"
-                                   placeholder="Email">
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="submit" value="Enviar email" name="btn-esqueci-senha"
-                                   class="btn btn-success btn-block">
-                        </div>
+        <div class="card col-sm-12">
+            <div class="card-body">
+                <h4 class="light">Recuperação de Senha</h4>
+                <br>
+                <div class="row">
+                    <div class="col col-md-6">
+                        <form class="form-group" method="POST" action="web/controller/UsuarioController.php">
+                            <div class="row">
+                                Para recuperar a sua senha, informe o email cadastrado.
+                                <br>
+                                Será enviado um código de verificação para o seu email.
+                                <br><br>
+                                <div class="col-sm-8">
+                                    <input type="email" name="email" class="form-control input-sm"
+                                           placeholder="Email">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="submit" value="Enviar email" name="btn-esqueci-senha"
+                                           class="btn btn-success btn-block">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

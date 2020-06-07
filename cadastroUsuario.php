@@ -1,7 +1,4 @@
 <html>
-<?php
-    include("header.php");
-?>
 <head>
     <title>Cadastro de usuário</title>
     <meta charset="utf-8"/>
@@ -13,14 +10,15 @@
     <link rel="stylesheet" href="css/datepicker.min.css"/>
     <link rel="stylesheet" href="css/view/scarmed.css"/>
 
-    <!-- JAVASCRIPT -->
-    <script src="js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/datepicker.min.js"></script>
-    <script src="js/view/cadastroUsuario.js"></script>
+
 </head>
 <body>
+<!-- JAVASCRIPT -->
+<script src="js/sweetalert.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/datepicker.min.js"></script>
+<script src="js/view/cadastroUsuario.js"></script>
 <br>
     <div class="container">
         <div class="row">
